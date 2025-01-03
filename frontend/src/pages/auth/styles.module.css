@@ -7,7 +7,7 @@
   display: flex;
   flex-grow: 1;
   width: 100%;
-  font-family: Macan, sans-serif;
+  font-family: Lato, sans-serif;
   color: var(--color-text-primary);
   background-color: var(--color-background-secondary);
 }
