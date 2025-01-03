@@ -12,10 +12,5 @@
       "shared/*": ["../shared/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "prisma",
-    "src/libs/core/base-repository.ts"
-  ]
+  "exclude": ["node_modules", "dist", "prisma", "src/libs/core/base-repository.ts"]
 }

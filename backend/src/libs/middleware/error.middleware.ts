@@ -6,12 +6,7 @@ interface HttpError extends Error {
   errors?: unknown;
 }
 
-const errorHandler = (
-  error: HttpError,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const errorHandler = (error: HttpError, req: Request, res: Response, next: NextFunction) => {
   const statusCode = error.status || 500;
   const message = error.message || 'An unexpected error occurred';
   const errors = error.errors || null;

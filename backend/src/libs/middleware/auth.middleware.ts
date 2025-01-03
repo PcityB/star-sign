@@ -8,15 +8,11 @@ interface UserPayload {
 interface AuthRequest extends Request {
   user?: UserPayload;
   headers: {
-    'authorization': string;
-  }
+    authorization?: string;
+  };
 }
 
-const authMiddleware = (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): void => {
+const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction): void => {
   const authHeader = req.headers['authorization'];
 
   if (!authHeader) {

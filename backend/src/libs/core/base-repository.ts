@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 export abstract class BaseRepository<T, U, CreateInput, UpdateInput> {
   constructor(
     protected prisma: PrismaClient,
-    protected model: keyof PrismaClient
+    protected model: keyof PrismaClient,
   ) {}
 
   public async create(item: CreateInput): Promise<T> {
@@ -27,10 +27,7 @@ export abstract class BaseRepository<T, U, CreateInput, UpdateInput> {
     }) as Promise<T[]>;
   }
 
-  public async update(
-    id: number | string,
-    item: UpdateInput
-  ): Promise<T | null> {
+  public async update(id: number | string, item: UpdateInput): Promise<T | null> {
     return this.prisma[this.model].update({
       where: { id: Number(id) },
       data: item,

@@ -1,6 +1,1 @@
-export {
-  UserDTO,
-  SignInRequestDTO,
-  SignUpRequestDTO,
-  UserPatchRequestDTO,
-} from 'shared/src';
+export { UserDTO, SignInRequestDTO, SignUpRequestDTO, UserPatchRequestDTO } from 'shared/src';

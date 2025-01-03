@@ -9,9 +9,7 @@ interface Config {
 
 function requireEnv(variable: string | undefined, name: string): string {
   if (!variable) {
-    throw new Error(
-      `${name} is required but not defined in the environment variables`
-    );
+    throw new Error(`${name} is required but not defined in the environment variables`);
   }
   return variable;
 }

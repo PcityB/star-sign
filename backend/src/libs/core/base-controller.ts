@@ -7,7 +7,7 @@ export abstract class BaseController {
     res: Response,
     next: NextFunction,
     handler: (req: Request, res: Response) => Promise<void>,
-    schema?: ZodSchema
+    schema?: ZodSchema,
   ) {
     try {
       if (schema) {
@@ -40,11 +40,7 @@ export abstract class BaseController {
     }
   }
 
-  protected sendResponse(
-    res: Response,
-    data: unknown,
-    statusCode: number = 200
-  ) {
+  protected sendResponse(res: Response, data: unknown, statusCode: number = 200) {
     res.status(statusCode).json(data);
   }
 }

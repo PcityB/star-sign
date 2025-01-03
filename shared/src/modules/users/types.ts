@@ -18,7 +18,6 @@ export type UserDTO = {
   updatedAt: Date;
 };
 
-
 export type SignInRequestDTO = {
   email: string;
   password: string;

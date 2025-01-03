@@ -8,14 +8,10 @@ export const signUpRequestSchema = z.object({
 
 export const signUpRequestSchemaFront = z
   .object({
-    name: z
-      .string()
-      .min(1, 'First name must be at least 3 character long'),
+    name: z.string().min(1, 'First name must be at least 3 character long'),
     email: z.string().email('Invalid email address'),
     password: z.string().min(8, 'Password must be at least 6 characters long'),
-    confirmPassword: z
-      .string()
-      .min(8, 'Confirm password must be at least 6 characters long'),
+    confirmPassword: z.string().min(8, 'Confirm password must be at least 6 characters long'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
@@ -34,10 +30,7 @@ export const UserPatchRequestSchema = z.object({
     .max(100, { message: 'Name must be at most 100 characters' })
     .optional(),
 
-  email: z
-    .string()
-    .email({ message: 'Invalid email address' })
-    .optional(),
+  email: z.string().email({ message: 'Invalid email address' }).optional(),
 
   password: z
     .string()
@@ -45,51 +38,23 @@ export const UserPatchRequestSchema = z.object({
     .max(50, { message: 'Password must be at most 50 characters' })
     .optional(),
 
-  gender: z
-    .enum(['male', 'female', 'other'])
-    .optional(),
+  gender: z.enum(['male', 'female', 'other']).optional(),
 
-  birthTimestamp: z
-    .date()
-    .optional(),
+  birthTimestamp: z.date().optional(),
 
-  longitude: z
-    .number()
-    .optional(),
+  longitude: z.number().optional(),
 
-  latitude: z
-    .number()
-    .optional(),
+  latitude: z.number().optional(),
 
-  locationOfBirth: z
-    .string()
-    .max(200, { message: 'Location of birth must be at most 200 characters' })
-    .optional(),
+  locationOfBirth: z.string().max(200, { message: 'Location of birth must be at most 200 characters' }).optional(),
 
-  photos: z
-    .array(z.string().url())
-    .max(10, { message: 'You can upload up to 10 photos.' })
-    .optional(),
+  photos: z.array(z.string().url()).max(10, { message: 'You can upload up to 10 photos.' }).optional(),
 
-  description: z
-    .string()
-    .max(500, { message: 'Description must be at most 500 characters' })
-    .optional(),
+  description: z.string().max(500, { message: 'Description must be at most 500 characters' }).optional(),
 
-  minAge: z
-    .number()
-    .int()
-    .min(18, { message: 'Minimum age must be at least 18' })
-    .optional(),
+  minAge: z.number().int().min(18, { message: 'Minimum age must be at least 18' }).optional(),
 
-  maxAge: z
-    .number()
-    .int()
-    .max(100, { message: 'Maximum age must be at most 100' })
-    .optional(),
+  maxAge: z.number().int().max(100, { message: 'Maximum age must be at most 100' }).optional(),
 
-  currentLocation: z
-    .string()
-    .max(200, { message: 'Current location must be at most 200 characters' })
-    .optional(),
+  currentLocation: z.string().max(200, { message: 'Current location must be at most 200 characters' }).optional(),
 });

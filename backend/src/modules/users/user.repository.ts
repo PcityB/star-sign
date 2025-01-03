@@ -2,12 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
 import { BaseRepository } from '~/libs/core/base-repository';
 
-class UserRepository extends BaseRepository<
-  UserDTO,
-  UserDTO[],
-  SignUpRequestDTO,
-  UserPatchRequestDTO
-> {
+class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO, UserPatchRequestDTO> {
   constructor(prisma: PrismaClient) {
     super(prisma, 'user');
   }
