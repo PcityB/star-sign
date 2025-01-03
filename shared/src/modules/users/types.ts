@@ -3,7 +3,6 @@ export type UserDTO = {
   name: string;
   email: string;
   password: string;
-  role: string;
   gender?: string;
   birthTimestamp?: Date;
   longitude?: number;
