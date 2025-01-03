@@ -8,19 +8,19 @@ generator client {
 }
 
 model User {
-  id             String   @id @default(cuid()) // Unique identifier, uses `cuid` for safety
+  id             Int      @id @default(autoincrement()) // Unique numeric identifier
   name           String
   email          String   @unique // Enforce unique email addresses
   password       String
-  gender         String
-  birthTimestamp DateTime
+  gender         String?
+  birthTimestamp DateTime?
   longitude      Float?
   latitude       Float?
   locationOfBirth String?
   photos         String[] // Array of photo URLs
   description    String?
-  minAge         Int       // Minimum age for matching
-  maxAge         Int       // Maximum age for matching
+  minAge         Int?       // Minimum age for matching
+  maxAge         Int?      // Maximum age for matching
   currentLocation String?  // Optional: Store a location string (e.g., "City, Country")
   createdAt      DateTime  @default(now()) // Automatically set creation time
   updatedAt      DateTime  @updatedAt // Automatically update on record modification

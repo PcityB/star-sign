@@ -35,7 +35,7 @@ const SignUpForm = ({ onSubmit }: Properties): JSX.Element => {
       <p className={styles['form-text']}>
         Have an account? <Link to={AppPath.SIGN_IN}>Log in</Link>
       </p>
-      <Input autoComplete="given-name" control={control} errors={errors} label="First Name" name="name" type="text" />
+      <Input autoComplete="given-name" control={control} errors={errors} label="Name" name="name" type="text" />
       <Input autoComplete="email" control={control} errors={errors} label="Email" name="email" type="email" />
       <div className={styles['password-container']}>
         <Input

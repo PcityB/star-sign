@@ -8,7 +8,7 @@ export const signUpRequestSchema = z.object({
 
 export const signUpRequestSchemaFront = z
   .object({
-    name: z.string().min(1, 'First name must be at least 3 character long'),
+    name: z.string().min(1, 'Name must be at least 3 character long'),
     email: z.string().email('Invalid email address'),
     password: z.string().min(8, 'Password must be at least 6 characters long'),
     confirmPassword: z.string().min(8, 'Confirm password must be at least 6 characters long'),
