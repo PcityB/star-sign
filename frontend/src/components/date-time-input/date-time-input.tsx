@@ -54,6 +54,8 @@ export const DateTimePickerInput = <T extends FieldValues>({
           placeholderText="Select date and time"
           id={timestampName}
           maxDate={today}
+          showYearDropdown
+          scrollableYearDropdown
         />
         {errors?.[timestampName] && <span className={styles['error']}>{errors[timestampName]?.message}</span>}
       </div>
