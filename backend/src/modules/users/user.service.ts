@@ -3,6 +3,7 @@ import { UserRepository } from './user.repository';
 import { token } from '~/libs/token/token';
 import prisma from '~/libs/prisma/prisma-client';
 import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
+import axios from 'axios';
 
 class UserService {
   private userRepository = new UserRepository(prisma);
@@ -41,6 +42,30 @@ class UserService {
     }
 
     return this.selectUserFields(updatedUser);
+  }
+
+  public async queryAstronomyAPI(params: {
+    latitude: string;
+    longitude: string;
+    elevation: string;
+    from_date: string;
+    to_date: string;
+    time: string;
+  }) {
+    const authString = Buffer.from(`${process.env.ASTRONOMY_API_ID}:${process.env.ASTRONOMY_API_SECRET}`).toString('base64');
+
+    try {
+      const response = await axios.get('https://api.astronomyapi.com/api/v2/bodies/positions', {
+        headers: {
+          Authorization: `Basic ${authString}`,
+        },
+        params,
+      });
+
+      return response.data.data.table.rows;
+    } catch (error) {
+      throw { status: 500, errors: 'Failed to fetch planetary positions.' };
+    }
   }
 
   public async getById(id: string) {
