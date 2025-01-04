@@ -5,10 +5,12 @@ export type UserDTO = {
   password: string;
   gender?: string;
   birthTimestamp?: Date;
-  longitude?: number;
-  latitude?: number;
-  locationOfBirth?: string;
-  currentLocation?: string;
+  birthLongitude?: string;
+  birthLatitude?: string;
+  birthCity?: string;
+  birthCountry?: string;
+  currentCity?: string;
+  currentCountry?: string;
   photos?: string[];
   description?: string;
   minAge?: number;
@@ -30,14 +32,14 @@ export type SignUpRequestDTO = {
 
 export type UserPatchRequestDTO = {
   name?: string;
-  email?: string;
-  password?: string;
   gender?: string;
   birthTimestamp?: Date;
-  longitude?: number;
-  latitude?: number;
-  locationOfBirth?: string;
-  currentLocation?: string;
+  birthLongitude?: string;
+  birthLatitude?: string;
+  birthCity?: string;
+  birthCountry?: string;
+  currentCity?: string;
+  currentCountry?: string;
   photos?: File[] | string[];
   description?: string;
   minAge?: number;

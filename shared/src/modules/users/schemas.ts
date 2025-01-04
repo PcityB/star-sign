@@ -30,25 +30,21 @@ export const UserPatchRequestSchema = z.object({
     .max(100, { message: 'Name must be at most 100 characters' })
     .optional(),
 
-  email: z.string().email({ message: 'Invalid email address' }).optional(),
-
-  password: z
-    .string()
-    .min(8, { message: 'Password must be at least 8 characters' })
-    .max(50, { message: 'Password must be at most 50 characters' })
-    .optional(),
-
   gender: z.enum(['male', 'female', 'other']).optional(),
 
   birthTimestamp: z.date().optional(),
 
-  longitude: z.number().optional(),
+  birthLongitude: z.string().optional(),
 
-  latitude: z.number().optional(),
+  birthLatitude: z.string().optional(),
 
-  locationOfBirth: z.string().max(200, { message: 'Location of birth must be at most 200 characters' }).optional(),
+  birthCity: z.string().max(200, { message: 'City of birth must be at most 200 characters' }).optional(),
+  birthCountry: z.string().max(200, { message: 'Country of birth must be at most 200 characters' }).optional(),
 
-  photos: z.array(z.string().url()).max(10, { message: 'You can upload up to 10 photos.' }).optional(),
+  photos: z
+  .array(z.union([z.instanceof(File), z.string().url()]))
+  .max(10, { message: 'No more than 10 photos are allowed.' })
+  .optional(),
 
   description: z.string().max(500, { message: 'Description must be at most 500 characters' }).optional(),
 
@@ -56,5 +52,7 @@ export const UserPatchRequestSchema = z.object({
 
   maxAge: z.number().int().max(100, { message: 'Maximum age must be at most 100' }).optional(),
 
-  currentLocation: z.string().max(200, { message: 'Current location must be at most 200 characters' }).optional(),
+  currentCity: z.string().max(200, { message: 'Current city must be at most 200 characters' }).optional(),
+
+  currentCountry: z.string().max(200, { message: 'Current country must be at most 200 characters' }).optional(),
 });
