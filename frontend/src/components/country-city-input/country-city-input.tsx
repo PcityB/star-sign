@@ -101,8 +101,8 @@ export const CountryCityInput = <T extends FieldValues>({
           const cities = await City.getCitiesOfCountry(selectedCountry);
           const cityDetails = cities?.find((city) => city.name === selectedCity);
           if (cityDetails) {
-            handleValueSet(latitudeName, cityDetails.latitude || 0);
-            handleValueSet(longitudeName, cityDetails.longitude || 0);
+            handleValueSet(latitudeName, cityDetails.latitude || "");
+            handleValueSet(longitudeName, cityDetails.longitude || "");
           }
         } catch (error) {
           console.error('Error fetching city details:', error);
@@ -114,15 +114,15 @@ export const CountryCityInput = <T extends FieldValues>({
             (country) => country.isoCode === selectedCountry
           );
           if (countryDetails) {
-            handleValueSet(latitudeName, countryDetails.latitude || 0);
-            handleValueSet(longitudeName, countryDetails.longitude || 0);
+            handleValueSet(latitudeName, countryDetails.latitude || "");
+            handleValueSet(longitudeName, countryDetails.longitude || "");
           }
         } catch (error) {
           console.error('Error fetching country details:', error);
         }
       } else {
-        handleValueSet(latitudeName, 0);
-        handleValueSet(longitudeName, 0);
+        handleValueSet(latitudeName, "");
+        handleValueSet(longitudeName, "");
       }
     };
 
@@ -151,13 +151,14 @@ export const CountryCityInput = <T extends FieldValues>({
         isDisabled={!selectedCountry}
         isSearchable
       />
-
+      <div className={styles['coordinates']}>
       {latitudeName && (
         <Input
           control={control}
           errors={errors}
           name={latitudeName}
           label="Latitude"
+          isLabelHidden
           placeholder="Latitude will be set automatically"
           isDisabled
         />
@@ -165,6 +166,7 @@ export const CountryCityInput = <T extends FieldValues>({
 
       {longitudeName && (
         <Input
+        isLabelHidden
           control={control}
           errors={errors}
           name={longitudeName}
@@ -173,6 +175,7 @@ export const CountryCityInput = <T extends FieldValues>({
           isDisabled
         />
       )}
+      </div>
     </div>
   );
 };
