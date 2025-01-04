@@ -23,8 +23,9 @@ const RadioInput = <T extends FieldValues>({ label, name, control, options, erro
   const hasError = Boolean(error);
 
   return (
+    <div className={styles['input-wrapper']}>
+    <span className={getValidClassNames(styles['input-label-text'])}>{label}</span>
     <div className={styles.radioGroup}>
-      <span className={getValidClassNames(styles['input-label-text'])}>{label}</span>
       {options.map((option, index) => (
         <label key={index} className={styles.radioLabel}>
           <input
@@ -39,7 +40,7 @@ const RadioInput = <T extends FieldValues>({ label, name, control, options, erro
       ))}
       {hasError && <span className={styles['error']}>{error as string}</span>}
     </div>
-  );
+    </div>);
 };
 
 export default RadioInput;

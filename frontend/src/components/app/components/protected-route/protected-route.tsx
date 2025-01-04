@@ -11,17 +11,13 @@ interface ProtectedRouteProps {
   restrictedRoles?: string[];
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, user, authChecked, restrictedRoles = [] }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, user, authChecked }) => {
   if (!authChecked) {
     return <Loader />;
   }
 
   if (!user) {
     return <Navigate to={AppPath.SIGN_IN} />;
-  }
-
-  if (!user.role || restrictedRoles.includes(user.role)) {
-    return <Navigate to={AppPath.NOT_FOUND} />;
   }
 
   return element;

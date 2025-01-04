@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useController, Control, FieldErrors, FieldValues, FieldPath } from 'react-hook-form';
 import styles from './styles.module.css';
+import { RxCross2 } from 'react-icons/rx';
 import { getValidClassNames } from '~/helpers/helpers';
 
 interface Properties<T extends FieldValues> {
@@ -75,7 +76,7 @@ const ImageInput = <T extends FieldValues>({
         <input
           type="file"
           accept="image/jpeg, image/jpg, image/png"
-          multiple={maxImages > 1} // Allow multiple selection only if maxImages > 1
+          multiple={maxImages > 1}
           className={styles['input']}
           onChange={(e) => handleFiles(e.target.files)}
           disabled={isMaxImagesReached}
@@ -90,7 +91,7 @@ const ImageInput = <T extends FieldValues>({
               <img src={URL.createObjectURL(item)} alt={`preview-${index}`} className={styles.image} />
             )}
             <button type="button" onClick={() => removePreview(index)} className={styles.removeButton}>
-              x
+            <RxCross2 size={20} />
             </button>
           </div>
         ))}

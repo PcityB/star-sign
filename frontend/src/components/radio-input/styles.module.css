@@ -1,3 +1,10 @@
+.input-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;  
+}
+
 .input-label-text {
   font-family: Lato, sans-serif;
   font-size: 16px;
@@ -7,7 +14,6 @@
 
 .radioGroup {
   display: flex;
-  flex-direction: column;
   gap: 8px;
 }
 
@@ -30,4 +36,32 @@
   font-weight: 500;
   line-height: 1.3;
   color: var(--color-danger);
+}
+
+input[type='radio']:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
+input[type='radio']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: var(--color-brand-primary);
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
 }
