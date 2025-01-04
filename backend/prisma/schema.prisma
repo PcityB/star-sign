@@ -14,18 +14,19 @@ model User {
   password       String
   gender         String?
   birthTimestamp DateTime?
-  longitude      Float?
-  latitude       Float?
-  locationOfBirth String?
+  birthCity      String?
+  birthCountry   String?
+  birthLongitude String?
+  birthLatitude  String?
   photos         String[] // Array of photo URLs
   description    String?
   minAge         Int?       // Minimum age for matching
   maxAge         Int?      // Maximum age for matching
-  currentLocation String?  // Optional: Store a location string (e.g., "City, Country")
+  currentCity    String?
+  currentCountry String?
   createdAt      DateTime  @default(now()) // Automatically set creation time
   updatedAt      DateTime  @updatedAt // Automatically update on record modification
 
   @@index([email]) // Index for faster lookups by email
-  @@index([latitude, longitude]) // Index for geospatial queries
   @@map("users") // Optional: map model to a specific table name (e.g., `users`)
 }

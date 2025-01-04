@@ -60,6 +60,7 @@ class UserController extends BaseController {
 
       const userData = {
         ...req.body,
+        birthTimestamp: new Date(req.body.birthTimestamp).toISOString(),
         photos: photosUrls,
       };
 
