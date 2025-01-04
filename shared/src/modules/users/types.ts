@@ -50,3 +50,23 @@ export type AuthResponseDTO = {
   token: string;
   user: UserDTO;
 };
+
+export type PlanetaryPositionDTO = {
+  id: number;
+  userId: number;
+  sunSign: string;
+  moonSign: string;
+  ascendant: string;
+  sunPosition: string;
+  moonPosition: string;
+  mercury: string;
+  venus: string;
+  mars: string;
+  jupiter: string;
+  saturn: string;
+  uranus: string;
+  neptune: string;
+  pluto: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
