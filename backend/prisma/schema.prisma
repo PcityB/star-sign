@@ -8,25 +8,50 @@ generator client {
 }
 
 model User {
-  id             Int      @id @default(autoincrement()) // Unique numeric identifier
-  name           String
-  email          String   @unique // Enforce unique email addresses
-  password       String
-  gender         String?
-  birthTimestamp DateTime?
-  birthCity      String?
-  birthCountry   String?
-  birthLongitude String?
-  birthLatitude  String?
-  photos         String[] // Array of photo URLs
-  description    String?
-  minAge         Int?       // Minimum age for matching
-  maxAge         Int?      // Maximum age for matching
-  currentCity    String?
-  currentCountry String?
-  createdAt      DateTime  @default(now()) // Automatically set creation time
-  updatedAt      DateTime  @updatedAt // Automatically update on record modification
+  id                Int                 @id @default(autoincrement()) // Unique numeric identifier
+  name              String
+  email             String              @unique // Enforce unique email addresses
+  password          String
+  gender            String?
+  birthTimestamp    DateTime?
+  birthCity         String?
+  birthCountry      String?
+  birthLongitude    String?
+  birthLatitude     String?
+  photos            String[] // Array of photo URLs
+  description       String?
+  minAge            Int? // Minimum age for matching
+  maxAge            Int? // Maximum age for matching
+  currentCity       String?
+  currentCountry    String?
+  createdAt         DateTime            @default(now()) // Automatically set creation time
+  updatedAt         DateTime            @updatedAt // Automatically update on record modification
+  PlanetaryPosition PlanetaryPosition[]
 
   @@index([email]) // Index for faster lookups by email
   @@map("users") // Optional: map model to a specific table name (e.g., `users`)
+}
+
+model PlanetaryPosition {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  sunSign      String
+  moonSign     String
+  ascendant    String
+  sunPosition  String
+  moonPosition String
+  mercury      String
+  venus        String
+  mars         String
+  jupiter      String
+  saturn       String
+  uranus       String
+  neptune      String
+  pluto        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("planetary_positions")
 }
