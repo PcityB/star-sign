@@ -18,7 +18,7 @@ export type UserDTO = {
   createdAt: Date;
   updatedAt: Date;
   isDeleted?: boolean;
-  PlanetaryPosition?: PlanetaryPositionDTO[];
+  PlanetaryPosition?: PlanetaryPositionDTO;
 };
 
 export type SignInRequestDTO = {

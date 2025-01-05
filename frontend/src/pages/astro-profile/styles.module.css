@@ -1,32 +1,257 @@
-.container {
-  display: flex;
-  flex-grow: 1;
-}
-
-.hero {
+.profile-layout {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  background-color: var(--color-background-primary);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('~/assets/images/main-page-background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center 60%;
-  height: 60vh;
+  gap: 60px;
+  align-items: flex-start;
   width: 100%;
+  max-width: 1200px;
+  padding: 0;
+  margin: 0 auto;
+  color: var(--color-text-primary);
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 120%;
+}
+
+.profile-header {
+  display: flex;         /* Enable flexbox layout */
+  align-items: center;   /* Vertically center the elements */
+  justify-content: space-between; /* Distribute space: one item left and one right */
+  position: relative;  
+  width: 100%;
+}
+
+.profile-header-title {
+    margin: 0 auto;        /* Center the item horizontally in flex container */
+    position: absolute;    /* Override the flex alignment for this element */
+    left: 50%;             /* Move it to the center of the container */
+    transform: translateX(-50%); /* Adjust to align it perfectly to the center */
+}
+
+.profile-header-button {
+  margin-left: auto;
+  width: 15%;
+}
+
+.profile-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  border-radius: 15px;
+  width: 350px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5); /* Default background */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.hero-title {
-  text-align: center;
-  font-size: 50px;
-  color: var(--color-overlay);
+.card:hover {
+  transform: scale(1.1); /* Scale up on hover */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.4); /* Add glow effect */
 }
 
-.hero-subtitle {
-  margin-top: 25px;
-  color: var(--color-overlay);
+.cardTitle {
   font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--color-text-primary)
+}
+
+.cardValue {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.card svg{
+  margin: 15px;
+}
+
+/* Apply zodiac-specific colors to icon and value */
+.cardIcon {
+  margin: 15px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .cardIcon {
+  transform: scale(1.2); /* Slightly enlarge icon on hover */
+}
+
+.aries {
+  background: rgba(255, 99, 71, 0.4); /* Tomato background */
+}
+
+.aries .cardValue, .aries .cardIcon {
+  color: rgba(255, 99, 71, 1); /* Bright tomato for text/icon */
+}
+
+.taurus {
+  background: rgba(34, 139, 34, 0.4); /* Forest Green background */
+}
+
+.taurus .cardValue, .tarius .cardIcon {
+  color: rgba(34, 139, 34, 1); /* Bright forest green for text/icon */
+}
+
+.gemini {
+  background: rgba(255, 215, 0, 0.4); /* Gold background */
+}
+
+.gemini .cardValue, .gemini .cardIcon {
+  color: rgba(255, 215, 0, 1); /* Bright gold for text/icon */
+}
+
+/* Continue this pattern for other zodiac signs */
+.cancer {
+  background: rgba(135, 206, 250, 0.4); /* Sky Blue background */
+}
+
+.cancer .cardValue, .cancer .cardIcon {
+  color: rgba(135, 206, 250, 1); /* Bright sky blue for text/icon */
+}
+
+.leo {
+  background: rgba(255, 165, 0, 0.4); /* Orange background */
+}
+
+.leo .cardValue, .leo .cardIcon {
+  color: rgba(255, 165, 0, 1); /* Bright orange for text/icon */
+}
+
+/* Add similar rules for Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, and Pisces */
+.virgo {
+  background: rgba(46, 139, 87, 0.4);
+}
+
+.virgo .cardValue, .virgo .cardIcon {
+  color: rgba(46, 139, 87, 1);
+}
+
+.libra {
+  background: rgba(123, 104, 238, 0.4);
+}
+
+.libra .cardValue, .libra .cardIcon {
+  color: rgba(123, 104, 238, 1);
+}
+
+.scorpio {
+  background: rgba(220, 20, 60, 0.4);
+}
+
+.scorpio .cardValue, .scorpio .cardIcon {
+  color: rgba(220, 20, 60, 1);
+}
+
+.sagittarius {
+  background: rgba(255, 140, 0, 0.4);
+}
+
+.sagittarius .cardValue, .sagittarius .cardIcon {
+  color: rgba(255, 140, 0, 1);
+}
+
+.capricorn {
+  background: rgba(105, 105, 105, 0.4);
+}
+
+.capricorn .cardValue, .capricorn .cardIcon {
+  color: rgba(105, 105, 105, 1);
+}
+
+.aquarius {
+  background: rgba(0, 191, 255, 0.4);
+}
+
+.aquarius .cardValue, .aquarius .cardIcon {
+  color: rgba(0, 191, 255, 1);
+}
+
+.pisces {
+  background: rgba(72, 61, 139, 0.4);
+}
+
+.pisces .cardValue, .pisces .cardIcon {
+  color: rgba(72, 61, 139, 1);
+}
+
+/* planetary-positions */
+
+.planetary-positions {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+}
+
+
+.table-container {
+  overflow-x: auto; /* For responsive tables */
+  width: 100%;
+  margin: 0 0 40px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-primary)
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px 15px;
+  font-size: 1rem;
+}
+
+.row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.row:nth-child(odd) {
+  background-color: #fff;
+}
+
+.cell {
+  padding: 10px 15px;
+  font-size: 16px;
+  text-align: left;
+  color: var(--color-text-primary);
+}
+
+.cell:last-child {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+}
+
+.row:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
 }
