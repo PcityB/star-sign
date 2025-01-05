@@ -18,18 +18,18 @@
 }
 
 .profile-header {
-  display: flex;         /* Enable flexbox layout */
-  align-items: center;   /* Vertically center the elements */
+  display: flex; /* Enable flexbox layout */
+  align-items: center; /* Vertically center the elements */
   justify-content: space-between; /* Distribute space: one item left and one right */
-  position: relative;  
+  position: relative;
   width: 100%;
 }
 
 .profile-header-title {
-    margin: 0 auto;        /* Center the item horizontally in flex container */
-    position: absolute;    /* Override the flex alignment for this element */
-    left: 50%;             /* Move it to the center of the container */
-    transform: translateX(-50%); /* Adjust to align it perfectly to the center */
+  margin: 0 auto; /* Center the item horizontally in flex container */
+  position: absolute; /* Override the flex alignment for this element */
+  left: 50%; /* Move it to the center of the container */
+  transform: translateX(-50%); /* Adjust to align it perfectly to the center */
 }
 
 .profile-header-button {
@@ -54,20 +54,24 @@
   width: 350px;
   color: #fff;
   background: rgba(0, 0, 0, 0.5); /* Default background */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .card:hover {
   transform: scale(1.1); /* Scale up on hover */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.4); /* Add glow effect */
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(255, 255, 255, 0.4); /* Add glow effect */
 }
 
 .cardTitle {
   font-size: 20px;
   font-weight: 500;
   margin: 0;
-  color: var(--color-text-primary)
+  color: var(--color-text-primary);
 }
 
 .cardValue {
@@ -75,7 +79,7 @@
   font-weight: 600;
 }
 
-.card svg{
+.card svg {
   margin: 15px;
 }
 
@@ -93,7 +97,8 @@
   background: rgba(255, 99, 71, 0.4); /* Tomato background */
 }
 
-.aries .cardValue, .aries .cardIcon {
+.aries .cardValue,
+.aries .cardIcon {
   color: rgba(255, 99, 71, 1); /* Bright tomato for text/icon */
 }
 
@@ -101,7 +106,8 @@
   background: rgba(34, 139, 34, 0.4); /* Forest Green background */
 }
 
-.taurus .cardValue, .tarius .cardIcon {
+.taurus .cardValue,
+.tarius .cardIcon {
   color: rgba(34, 139, 34, 1); /* Bright forest green for text/icon */
 }
 
@@ -109,7 +115,8 @@
   background: rgba(255, 215, 0, 0.4); /* Gold background */
 }
 
-.gemini .cardValue, .gemini .cardIcon {
+.gemini .cardValue,
+.gemini .cardIcon {
   color: rgba(255, 215, 0, 1); /* Bright gold for text/icon */
 }
 
@@ -118,7 +125,8 @@
   background: rgba(135, 206, 250, 0.4); /* Sky Blue background */
 }
 
-.cancer .cardValue, .cancer .cardIcon {
+.cancer .cardValue,
+.cancer .cardIcon {
   color: rgba(135, 206, 250, 1); /* Bright sky blue for text/icon */
 }
 
@@ -126,7 +134,8 @@
   background: rgba(255, 165, 0, 0.4); /* Orange background */
 }
 
-.leo .cardValue, .leo .cardIcon {
+.leo .cardValue,
+.leo .cardIcon {
   color: rgba(255, 165, 0, 1); /* Bright orange for text/icon */
 }
 
@@ -135,7 +144,8 @@
   background: rgba(46, 139, 87, 0.4);
 }
 
-.virgo .cardValue, .virgo .cardIcon {
+.virgo .cardValue,
+.virgo .cardIcon {
   color: rgba(46, 139, 87, 1);
 }
 
@@ -143,7 +153,8 @@
   background: rgba(123, 104, 238, 0.4);
 }
 
-.libra .cardValue, .libra .cardIcon {
+.libra .cardValue,
+.libra .cardIcon {
   color: rgba(123, 104, 238, 1);
 }
 
@@ -151,7 +162,8 @@
   background: rgba(220, 20, 60, 0.4);
 }
 
-.scorpio .cardValue, .scorpio .cardIcon {
+.scorpio .cardValue,
+.scorpio .cardIcon {
   color: rgba(220, 20, 60, 1);
 }
 
@@ -159,7 +171,8 @@
   background: rgba(255, 140, 0, 0.4);
 }
 
-.sagittarius .cardValue, .sagittarius .cardIcon {
+.sagittarius .cardValue,
+.sagittarius .cardIcon {
   color: rgba(255, 140, 0, 1);
 }
 
@@ -167,7 +180,8 @@
   background: rgba(105, 105, 105, 0.4);
 }
 
-.capricorn .cardValue, .capricorn .cardIcon {
+.capricorn .cardValue,
+.capricorn .cardIcon {
   color: rgba(105, 105, 105, 1);
 }
 
@@ -175,7 +189,8 @@
   background: rgba(0, 191, 255, 0.4);
 }
 
-.aquarius .cardValue, .aquarius .cardIcon {
+.aquarius .cardValue,
+.aquarius .cardIcon {
   color: rgba(0, 191, 255, 1);
 }
 
@@ -183,7 +198,8 @@
   background: rgba(72, 61, 139, 0.4);
 }
 
-.pisces .cardValue, .pisces .cardIcon {
+.pisces .cardValue,
+.pisces .cardIcon {
   color: rgba(72, 61, 139, 1);
 }
 
@@ -201,13 +217,12 @@
   align-items: center;
 }
 
-
 .table-container {
   overflow-x: auto; /* For responsive tables */
   width: 100%;
   margin: 0 0 40px;
   border-radius: 10px;
-  border: 1px solid var(--color-border-primary)
+  border: 1px solid var(--color-border-primary);
 }
 
 .table {

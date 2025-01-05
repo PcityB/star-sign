@@ -91,7 +91,7 @@ const ImageInput = <T extends FieldValues>({
               <img src={URL.createObjectURL(item)} alt={`preview-${index}`} className={styles.image} />
             )}
             <button type="button" onClick={() => removePreview(index)} className={styles.removeButton}>
-            <RxCross2 size={20} />
+              <RxCross2 size={20} />
             </button>
           </div>
         ))}

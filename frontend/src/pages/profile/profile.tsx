@@ -25,17 +25,17 @@ const Profile = (): JSX.Element => {
   function calculateAge(dateOfBirth: string): number {
     const today = new Date();
     const birthDate = new Date(dateOfBirth);
-  
+
     let age = today.getFullYear() - birthDate.getFullYear();
-  
-    const isBirthdayPassed = 
-      today.getMonth() > birthDate.getMonth() || 
+
+    const isBirthdayPassed =
+      today.getMonth() > birthDate.getMonth() ||
       (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
-  
+
     if (!isBirthdayPassed) {
       age--;
     }
-  
+
     return age;
   }
 
@@ -72,11 +72,15 @@ const Profile = (): JSX.Element => {
             </div>
             <div className={styles['profile-text-block']}>
               <h2>Age</h2>
-              <h3>{user.birthTimestamp ? calculateAge(new Date(user.birthTimestamp).toDateString()) + " y. o." : 'Not specified'}</h3>
+              <h3>
+                {user.birthTimestamp
+                  ? calculateAge(new Date(user.birthTimestamp).toDateString()) + ' y. o.'
+                  : 'Not specified'}
+              </h3>
             </div>
             <div className={styles['profile-text-block']}>
               <h2>Location of birth</h2>
-              <h3>{user.birthCountry ? user.birthCity + ", " + user.birthCountry : 'Not specified'}</h3>
+              <h3>{user.birthCountry ? user.birthCity + ', ' + user.birthCountry : 'Not specified'}</h3>
             </div>
             <div className={styles['profile-text-block']}>
               <h2>Description</h2>

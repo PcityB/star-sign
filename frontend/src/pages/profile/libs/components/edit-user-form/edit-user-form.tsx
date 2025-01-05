@@ -22,7 +22,7 @@ const EditUserForm = ({ user }: Properties): JSX.Element => {
       photos,
       gender,
       description,
-      birthTimestamp: birthTimestamp ? new Date(birthTimestamp): birthTimestamp,
+      birthTimestamp: birthTimestamp ? new Date(birthTimestamp) : birthTimestamp,
       birthCity,
       birthCountry,
       birthLatitude,

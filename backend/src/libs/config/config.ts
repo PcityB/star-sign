@@ -13,7 +13,7 @@ interface Config {
   astronomy: {
     apiId: string;
     apiSecret: string;
-  }
+  };
 }
 
 function requireEnv(variable: string | undefined, name: string): string {

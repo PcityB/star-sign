@@ -69,18 +69,18 @@ class UserController extends BaseController {
       this.sendResponse(res, { updatedUser }, 200);
     });
 
-    public deleteCurrentUser = (req: Request, res: Response, next: NextFunction) =>
-      this.handleRequest(req, res, next, async (req: AuthRequest, res: Response) => {
-        const userId = req.user?.id as string;
-        
-        const userData = {
-          isDeleted: true,
-        };
-  
-        const updatedUser = this.userService.update(userData, userId, userId);
-  
-        this.sendResponse(res, { updatedUser }, 200);
-      });
+  public deleteCurrentUser = (req: Request, res: Response, next: NextFunction) =>
+    this.handleRequest(req, res, next, async (req: AuthRequest, res: Response) => {
+      const userId = req.user?.id as string;
+
+      const userData = {
+        isDeleted: true,
+      };
+
+      const updatedUser = this.userService.update(userData, userId, userId);
+
+      this.sendResponse(res, { updatedUser }, 200);
+    });
 }
 
 export { UserController };

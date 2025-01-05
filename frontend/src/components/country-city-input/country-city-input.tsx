@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Control,
-  FieldErrors,
-  FieldPath,
-  FieldValues,
-  UseFormSetValue,
-  useWatch,
-} from 'react-hook-form';
+import { Control, FieldErrors, FieldPath, FieldValues, UseFormSetValue, useWatch } from 'react-hook-form';
 import { Country, City, ICountry, ICity } from 'country-state-city';
 import { SelectOption } from '~/common/types/types.js';
 import { Input, Select } from '../components';
@@ -35,9 +28,7 @@ export const CountryCityInput = <T extends FieldValues>({
   errors,
   handleValueSet,
 }: Properties<T>) => {
-  const [countryOptions, setCountryOptions] = useState<SelectOption<string>[]>(
-    []
-  );
+  const [countryOptions, setCountryOptions] = useState<SelectOption<string>[]>([]);
   const [cityOptions, setCityOptions] = useState<SelectOption<string>[]>([]);
 
   const selectedCountry = useWatch({
@@ -58,7 +49,7 @@ export const CountryCityInput = <T extends FieldValues>({
           countries.map((country: ICountry) => ({
             label: country.name,
             value: country.isoCode,
-          }))
+          })),
         );
       } catch (error) {
         console.error('Error fetching countries:', error);
@@ -79,7 +70,7 @@ export const CountryCityInput = <T extends FieldValues>({
                   label: city.name,
                   value: city.name,
                 }))
-              : []
+              : [],
           );
         } catch (error) {
           console.error('Error fetching cities:', error);
@@ -101,8 +92,8 @@ export const CountryCityInput = <T extends FieldValues>({
           const cities = await City.getCitiesOfCountry(selectedCountry);
           const cityDetails = cities?.find((city) => city.name === selectedCity);
           if (cityDetails) {
-            handleValueSet(latitudeName, cityDetails.latitude || "");
-            handleValueSet(longitudeName, cityDetails.longitude || "");
+            handleValueSet(latitudeName, cityDetails.latitude || '');
+            handleValueSet(longitudeName, cityDetails.longitude || '');
           }
         } catch (error) {
           console.error('Error fetching city details:', error);
@@ -110,19 +101,17 @@ export const CountryCityInput = <T extends FieldValues>({
       } else if (selectedCountry) {
         try {
           const countries = await Country.getAllCountries();
-          const countryDetails = countries.find(
-            (country) => country.isoCode === selectedCountry
-          );
+          const countryDetails = countries.find((country) => country.isoCode === selectedCountry);
           if (countryDetails) {
-            handleValueSet(latitudeName, countryDetails.latitude || "");
-            handleValueSet(longitudeName, countryDetails.longitude || "");
+            handleValueSet(latitudeName, countryDetails.latitude || '');
+            handleValueSet(longitudeName, countryDetails.longitude || '');
           }
         } catch (error) {
           console.error('Error fetching country details:', error);
         }
       } else {
-        handleValueSet(latitudeName, "");
-        handleValueSet(longitudeName, "");
+        handleValueSet(latitudeName, '');
+        handleValueSet(longitudeName, '');
       }
     };
 
@@ -152,29 +141,29 @@ export const CountryCityInput = <T extends FieldValues>({
         isSearchable
       />
       <div className={styles['coordinates']}>
-      {latitudeName && (
-        <Input
-          control={control}
-          errors={errors}
-          name={latitudeName}
-          label="Latitude"
-          isLabelHidden
-          placeholder="Latitude will be set automatically"
-          isDisabled
-        />
-      )}
+        {latitudeName && (
+          <Input
+            control={control}
+            errors={errors}
+            name={latitudeName}
+            label="Latitude"
+            isLabelHidden
+            placeholder="Latitude will be set automatically"
+            isDisabled
+          />
+        )}
 
-      {longitudeName && (
-        <Input
-        isLabelHidden
-          control={control}
-          errors={errors}
-          name={longitudeName}
-          label="Longitude"
-          placeholder="Longitude will be set automatically"
-          isDisabled
-        />
-      )}
+        {longitudeName && (
+          <Input
+            isLabelHidden
+            control={control}
+            errors={errors}
+            name={longitudeName}
+            label="Longitude"
+            placeholder="Longitude will be set automatically"
+            isDisabled
+          />
+        )}
       </div>
     </div>
   );

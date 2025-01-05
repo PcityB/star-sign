@@ -36,7 +36,6 @@
 }
 
 .profile-image-wrapper {
-
   width: 500px;
   height: 700px;
   overflow: hidden;
@@ -68,7 +67,7 @@ h3 {
   margin: 0;
 }
 
-.profile-text h1{
+.profile-text h1 {
   font-weight: 400;
 }
 
@@ -94,23 +93,23 @@ h3 {
   width: 100%;
 }
 
-.profile-text-block h2, .profile-text-block h3{
+.profile-text-block h2,
+.profile-text-block h3 {
   color: var(--color-text-primary);
   margin: 0;
 }
 
-.profile-text-block h2{
+.profile-text-block h2 {
   font-weight: 500;
   font-size: 18px;
 }
 
-.profile-text-block h3{
+.profile-text-block h3 {
   font-weight: 400;
   font-size: 16px;
 }
 
-.profile-text-block p
-{
+.profile-text-block p {
   margin: 0;
   font-size: 16px;
   font-weight: 400;

@@ -42,9 +42,9 @@ export const UserPatchRequestSchema = z.object({
   birthCountry: z.string().max(200, { message: 'Country of birth must be at most 200 characters' }).optional(),
 
   photos: z
-  .array(z.union([z.instanceof(File), z.string().url()]))
-  .max(10, { message: 'No more than 10 photos are allowed.' })
-  .optional(),
+    .array(z.union([z.instanceof(File), z.string().url()]))
+    .max(10, { message: 'No more than 10 photos are allowed.' })
+    .optional(),
 
   description: z.string().max(500, { message: 'Description must be at most 500 characters' }).optional(),
 

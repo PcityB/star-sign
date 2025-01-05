@@ -19,18 +19,9 @@ class PlanetaryPositionService {
     const A = Math.floor(year / 100);
     const B = 2 - A + Math.floor(A / 4);
 
-    const jd =
-      Math.floor(365.25 * (year + 4716)) +
-      Math.floor(30.6001 * (month + 1)) +
-      day +
-      B -
-      1524.5;
+    const jd = Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
 
-    const timeFraction =
-      (date.getUTCHours() +
-        date.getUTCMinutes() / 60 +
-        date.getUTCSeconds() / 3600) /
-      24;
+    const timeFraction = (date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600) / 24;
 
     return jd + timeFraction;
   }
@@ -50,24 +41,34 @@ class PlanetaryPositionService {
   private calculateAscendant(lst: number, latitude: number): number {
     const lstRad = (lst * Math.PI) / 180; // Convert LST from degrees to radians
     const latRad = (latitude * Math.PI) / 180; // Convert latitude from degrees to radians
-  
+
     const epsilon = (23.4397 * Math.PI) / 180; // Obliquity of the ecliptic in radians
-  
+
     // Calculate the ascendant in radians
     const ascendantRad = Math.atan2(
       Math.cos(lstRad),
-      -Math.sin(lstRad) * Math.cos(epsilon) - Math.tan(latRad) * Math.sin(epsilon)
+      -Math.sin(lstRad) * Math.cos(epsilon) - Math.tan(latRad) * Math.sin(epsilon),
     );
-  
+
     // Convert the ascendant to degrees and normalize to [0, 360)
     const ascendantDeg = (ascendantRad * 180) / Math.PI;
     return ascendantDeg >= 0 ? ascendantDeg : ascendantDeg + 360;
-  }  
+  }
 
   private calculateZodiacSign(degrees: number): string {
     const zodiacSigns = [
-      'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
-      'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces',
+      'Aries',
+      'Taurus',
+      'Gemini',
+      'Cancer',
+      'Leo',
+      'Virgo',
+      'Libra',
+      'Scorpio',
+      'Sagittarius',
+      'Capricorn',
+      'Aquarius',
+      'Pisces',
     ];
     const index = Math.floor(degrees / 30) % 12;
     return zodiacSigns[index];
@@ -76,24 +77,23 @@ class PlanetaryPositionService {
   private calculateHouse(positionDegrees: number, ascendantDegrees: number): number {
     // Normalize position to the Ascendant's coordinate system
     const normalizedPosition = (positionDegrees - ascendantDegrees + 360) % 360;
-  
+
     // Calculate house index (1-based)
     const houseIndex = Math.floor(normalizedPosition / 30) + 1;
-  
+
     return houseIndex;
   }
-  
 
   public async calculatePlanetaryPositions(
     userId: number,
     latitude: string,
     longitude: string,
-    date: Date
+    date: Date,
   ): Promise<void> {
     // Format the Date object into the required API format
     const formattedDate = date.toISOString().split('T')[0]; // Extract YYYY-MM-DD
     const formattedTime = date.toISOString().split('T')[1].split('.')[0]; // Extract HH:MM:SS
-  
+
     const userParams = {
       latitude,
       longitude,
@@ -130,10 +130,9 @@ class PlanetaryPositionService {
       const planetData = planetaryData.find((row: any) => row.entry.id === planet)?.cells[0];
       const planetRA = parseFloat(planetData.position.equatorial.rightAscension.hours) * 15;
       const house = this.calculateHouse(planetRA, ascendant);
-    
+
       return `${planetRA}, ${house}, ${this.calculateZodiacSign(planetRA)}`;
     });
-    
 
     const data = {
       userId,
@@ -163,7 +162,9 @@ class PlanetaryPositionService {
     to_date: string;
     time: string;
   }) {
-    const authString = Buffer.from(`${process.env.ASTRONOMY_API_ID}:${process.env.ASTRONOMY_API_SECRET}`).toString('base64');
+    const authString = Buffer.from(`${process.env.ASTRONOMY_API_ID}:${process.env.ASTRONOMY_API_SECRET}`).toString(
+      'base64',
+    );
 
     try {
       const response = await axios.get('https://api.astronomyapi.com/api/v2/bodies/positions', {

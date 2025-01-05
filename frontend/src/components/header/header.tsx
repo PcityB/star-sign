@@ -31,7 +31,7 @@ const Header = (): JSX.Element => {
         <img alt="logo" className={styles['logo-img']} src={logoSrc} />
       </NavLink>
       <div className={styles['header-links']}>
-      <HeaderLink label="Astro Profile" link={AppPath.ASTROPROFILE} />
+        <HeaderLink label="Astro Profile" link={AppPath.ASTROPROFILE} />
         <UserPopover isOpened={isUserOpened} name={name} onClose={onUserClose}>
           <button className={styles['user-popover-trigger']} onClick={isUserOpened ? onUserClose : onUserOpen}>
             <Avatar name={name} imageUrl={photos && photos.length > 0 ? photos[0] : undefined} />

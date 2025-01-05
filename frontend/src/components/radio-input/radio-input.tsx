@@ -24,23 +24,24 @@ const RadioInput = <T extends FieldValues>({ label, name, control, options, erro
 
   return (
     <div className={styles['input-wrapper']}>
-    <span className={getValidClassNames(styles['input-label-text'])}>{label}</span>
-    <div className={styles.radioGroup}>
-      {options.map((option, index) => (
-        <label key={index} className={styles.radioLabel}>
-          <input
-            type="radio"
-            value={option.value}
-            checked={value === option.value}
-            onChange={onChange}
-            className={styles.radioInput}
-          />
-          {option.label}
-        </label>
-      ))}
-      {hasError && <span className={styles['error']}>{error as string}</span>}
+      <span className={getValidClassNames(styles['input-label-text'])}>{label}</span>
+      <div className={styles.radioGroup}>
+        {options.map((option, index) => (
+          <label key={index} className={styles.radioLabel}>
+            <input
+              type="radio"
+              value={option.value}
+              checked={value === option.value}
+              onChange={onChange}
+              className={styles.radioInput}
+            />
+            {option.label}
+          </label>
+        ))}
+        {hasError && <span className={styles['error']}>{error as string}</span>}
+      </div>
     </div>
-    </div>);
+  );
 };
 
 export default RadioInput;

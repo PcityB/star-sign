@@ -72,4 +72,4 @@ export type PlanetaryPositionDTO = {
   pluto: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};
