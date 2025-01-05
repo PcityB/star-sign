@@ -32,11 +32,13 @@
   display: flex;
   align-items: center;
   gap: 40px;
+  width: 100%;
 }
 
 .profile-image-wrapper {
-  width: 200px;
-  height: 200px;
+
+  width: 500px;
+  height: 700px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -57,13 +59,17 @@
 .profile-text {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 .profile-text h1,
 h2,
 h3 {
   margin: 0;
+}
+
+.profile-text h1{
+  font-weight: 400;
 }
 
 .profile-text h2,
@@ -79,4 +85,35 @@ h3 {
 
 .portfolio-placeholder {
   margin: 0;
+}
+
+.profile-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.profile-text-block h2, .profile-text-block h3{
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.profile-text-block h2{
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.profile-text-block h3{
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.profile-text-block p
+{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  max-width: 460px;
 }

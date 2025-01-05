@@ -87,8 +87,8 @@ const EditUserForm = ({ user }: Properties): JSX.Element => {
           control={control}
           cityName="birthCity"
           countryName="birthCountry"
-          cityLabel="City"
-          countryLabel="Country"
+          cityLabel="City of birth"
+          countryLabel="Country of birth"
           errors={errors}
           handleValueSet={handleValueSet}
           latitudeName="birthLatitude"

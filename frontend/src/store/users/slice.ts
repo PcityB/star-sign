@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { update } from './actions';
+import { deleteCurrentUser, update } from './actions';
 import { ValueOf } from '~/common/types/types';
 import { DataStatus } from '~/common/enums/enums';
 import { notifyError, notifySuccess } from '~/utils/notification/notification';
 
 export interface UsersState {
   updateStatus: ValueOf<typeof DataStatus>;
+  deleteStatus: ValueOf<typeof DataStatus>;
   error: { code: string | number | undefined; message: string | undefined };
 }
 
 const initialState: UsersState = {
   updateStatus: DataStatus.IDLE,
+  deleteStatus: DataStatus.IDLE,
   error: { code: undefined, message: undefined },
 };
 
@@ -35,6 +37,16 @@ const { reducer, actions, name } = createSlice({
         };
         notifyError(action.error.message || 'Failed to update user');
       });
+
+    builder.addCase(deleteCurrentUser.pending, (state) => {
+      state.deleteStatus = DataStatus.PENDING;
+    });
+    builder.addCase(deleteCurrentUser.fulfilled, (state) => {
+      state.deleteStatus = DataStatus.SUCCESS;
+    });
+    builder.addCase(deleteCurrentUser.rejected, (state) => {
+      state.deleteStatus = DataStatus.ERROR;
+    });
   },
 });
 

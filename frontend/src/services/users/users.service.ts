@@ -40,6 +40,15 @@ class Users {
     });
   }
 
+  public deleteCurrentUser(): Promise<UserDTO> {
+    const token = getToken();
+
+    return this.http.load(this.getUrl(), {
+      method: 'DELETE',
+      token,
+    });
+  }
+
   private getUrl(path = ''): string {
     return `${this.baseUrl}${this.basePath}${path}`;
   }

@@ -11,4 +11,13 @@ const update = createAsyncThunk<void, { id: string; data: UserPatchRequestDTO },
   },
 );
 
-export { update };
+const deleteCurrentUser = createAsyncThunk<void, undefined, AsyncThunkConfig>(
+  `${name}/delete-current-user`,
+  async ( _, { dispatch, extra: { usersService } }) => {
+    await usersService.deleteCurrentUser();
+    await dispatch(authActions.fetchAuthenticatedUser());
+    void dispatch(authActions.signOut());
+  },
+);
+
+export { update, deleteCurrentUser };
