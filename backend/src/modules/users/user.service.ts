@@ -77,6 +77,7 @@ class UserService {
       maxAge,
       createdAt,
       updatedAt,
+      PlanetaryPosition
     } = user;
 
     return {
@@ -97,6 +98,7 @@ class UserService {
       maxAge,
       createdAt,
       updatedAt,
+      PlanetaryPosition: PlanetaryPosition ? PlanetaryPosition[0]: null
     };
   }
 }
