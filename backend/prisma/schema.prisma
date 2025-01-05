@@ -27,6 +27,7 @@ model User {
   createdAt         DateTime            @default(now()) // Automatically set creation time
   updatedAt         DateTime            @updatedAt // Automatically update on record modification
   PlanetaryPosition PlanetaryPosition[]
+  isDeleted         Boolean  @default(false)
 
   @@index([email]) // Index for faster lookups by email
   @@map("users") // Optional: map model to a specific table name (e.g., `users`)

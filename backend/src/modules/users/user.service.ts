@@ -22,7 +22,7 @@ class UserService {
 
   public async signIn(email: string, password: string) {
     const user = await this.userRepository.findByEmail(email);
-    if (!user) {
+    if (!user || user.isDeleted) {
       throw { status: 403, errors: 'There is no user with this credentials.' };
     }
     if (!(await encryption.compare(password, user.password))) {
@@ -55,7 +55,7 @@ class UserService {
 
   public async getById(id: string) {
     const user = await this.userRepository.find(id);
-    return user ? this.selectUserFields(user) : null;
+    return user && !user.isDeleted ? this.selectUserFields(user) : null;
   }
 
   private selectUserFields(user: UserDTO) {

@@ -17,6 +17,7 @@ export type UserDTO = {
   maxAge?: number;
   createdAt: Date;
   updatedAt: Date;
+  isDeleted?: boolean;
 };
 
 export type SignInRequestDTO = {
@@ -44,6 +45,7 @@ export type UserPatchRequestDTO = {
   description?: string;
   minAge?: number;
   maxAge?: number;
+  isDeleted?: boolean;
 };
 
 export type AuthResponseDTO = {

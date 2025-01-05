@@ -14,4 +14,6 @@ router.get('/auth/authenticated-user', authMiddleware, userController.getAuthent
 
 router.patch('/users/:id', authMiddleware, upload.array('photos', 10), userController.patchUser);
 
+router.delete('/users/', authMiddleware, userController.deleteCurrentUser);
+
 export default router;
