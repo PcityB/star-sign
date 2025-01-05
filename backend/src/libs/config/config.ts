@@ -10,6 +10,10 @@ interface Config {
     apiKey: string;
     apiSecret: string;
   };
+  astronomy: {
+    apiId: string;
+    apiSecret: string;
+  }
 }
 
 function requireEnv(variable: string | undefined, name: string): string {
@@ -26,6 +30,10 @@ const config: Config = {
     cloudName: requireEnv(process.env.CLOUDINARY_CLOUD_NAME, 'CLOUDINARY_CLOUD_NAME'),
     apiKey: requireEnv(process.env.CLOUDINARY_API_KEY, 'CLOUDINARY_API_KEY'),
     apiSecret: requireEnv(process.env.CLOUDINARY_API_SECRET, 'CLOUDINARY_API_SECRET'),
+  },
+  astronomy: {
+    apiId: requireEnv(process.env.ASTRONOMY_API_ID, 'ASTRONOMY_API_ID'),
+    apiSecret: requireEnv(process.env.ASTRONOMY_API_SECRET, 'ASTRONOMY_API_SECRET'),
   },
 };
 

@@ -48,6 +48,7 @@ class UserController extends BaseController {
       const updatedUserId = req.params.id;
       let photosUrls = req.body.photos || [];
       let photosFiles = (req.files as Express.Multer.File[]) || [];
+      console.log(new Date(req.body.birthTimestamp.toString()));
 
       if (!Array.isArray(photosUrls)) {
         photosUrls = [photosUrls];
