@@ -3,9 +3,11 @@ import { UserRepository } from './user.repository';
 import { token } from '~/libs/token/token';
 import prisma from '~/libs/prisma/prisma-client';
 import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
+import { PlanetaryPositionService } from '../planetary-positions/planetary-positions.service';
 
 class UserService {
   private userRepository = new UserRepository(prisma);
+  private planetaryPositionService = new PlanetaryPositionService();
 
   public async create(userPayload: SignUpRequestDTO) {
     if (await this.userRepository.findByEmail(userPayload.email)) {
@@ -38,6 +40,14 @@ class UserService {
     const updatedUser = await this.userRepository.update(id, userPayload);
     if (!updatedUser) {
       throw { status: 500, errors: 'Error happened while updating the user.' };
+    }
+    if (updatedUser.birthLongitude && updatedUser.birthLatitude && updatedUser.birthTimestamp) {
+      this.planetaryPositionService.calculatePlanetaryPositions(
+        Number(updatedUser.id),
+        updatedUser.birthLatitude,
+        updatedUser.birthLongitude,
+        updatedUser.birthTimestamp,
+      );
     }
 
     return this.selectUserFields(updatedUser);
