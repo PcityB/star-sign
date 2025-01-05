@@ -1,8 +1,7 @@
 .container {
   position: relative;
   overflow: hidden;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-radius: 14px;
   width: 100%;
   z-index: 2;
 }
@@ -13,18 +12,18 @@
 }
 
 .imageLink {
-  width: 100%; /* Ensure the NavLink takes the full width */
+  display: flex; /* Allow vertical stacking */
+  flex-direction: column; /* Stack images vertically */
+  width: 100%; /* Adjust to container width */
   height: auto; /* Adjust height as needed */
   flex-shrink: 0; /* Prevent shrinking */
-  display: flex; /* Allow child image to stretch properly */
 }
 
 .image {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 4; /* Keep the aspect ratio for each image */
   object-fit: cover;
-  flex-shrink: 0;
 }
 
 .navButton {
@@ -66,16 +65,16 @@
   transform: translateX(-50%);
   display: flex;
   gap: 5px;
-  opacity: 0; /* Start hidden */
-  visibility: hidden; /* Prevent focusability when hidden */
+  opacity: 0;
+  visibility: hidden;
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
 }
 
 .container:hover .dotsContainer {
-  opacity: 1; /* Fully visible */
-  visibility: visible; /* Ensure it is focusable */
+  opacity: 1;
+  visibility: visible;
 }
 
 .dot {

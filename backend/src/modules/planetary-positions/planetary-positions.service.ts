@@ -109,8 +109,6 @@ class PlanetaryPositionService {
     const sunData = planetaryData.find((row: any) => row.entry.id === 'sun').cells[0];
     const moonData = planetaryData.find((row: any) => row.entry.id === 'moon').cells[0];
 
-    console.log(sunData.position.equatorial.rightAscension.hours, moonData.position.equatorial.rightAscension.hours)
-
     const sunRA = parseFloat(sunData.position.equatorial.rightAscension.hours) * 15;
     const moonRA = parseFloat(moonData.position.equatorial.rightAscension.hours) * 15;
 

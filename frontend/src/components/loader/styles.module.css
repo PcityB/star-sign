@@ -4,26 +4,34 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+  padding: 20%;
 }
 
-.spinner {
-  --size: 50px;
-  --thickness: 2px;
-  --color-primary: var(--color-brand-primary);
-
-  width: var(--size);
-  height: var(--size);
-  border: var(--thickness) solid transparent;
-  border-top: var(--thickness) solid var(--color-primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.pulse {
+  width: 56px;
+  height: 56px;
+  color: var(--color-brand-primary);
+  background: radial-gradient(circle at 60% 65%, currentColor 62%, #0000 65%) top left,
+        radial-gradient(circle at 40% 65%, currentColor 62%, #0000 65%) top right,
+        linear-gradient(to bottom left, currentColor 42%,#0000 43%) bottom left ,
+        linear-gradient(to bottom right,currentColor 42%,#0000 43%) bottom right;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+.pulse:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0.4;
+  animation: pl3 1s infinite;
+}
+
+@keyframes pl3 {
+  to {
+     transform: scale(1.8);
+     opacity: 0;
   }
 }
