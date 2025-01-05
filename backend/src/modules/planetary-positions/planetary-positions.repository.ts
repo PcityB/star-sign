@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { PlanetaryPositionDTO } from './user.model';
+import { PlanetaryPositionDTO } from './planetary-positions.model';
 import { BaseRepository } from '~/libs/core/base-repository';
 
 export class PlanetaryPositionRepository extends BaseRepository<
