@@ -7,6 +7,7 @@ import { UserDTO } from '~/common/types/types';
 import { Auth } from '~/pages/auth/auth';
 import { Profile } from '~/pages/profile/profile';
 import { Main } from '~/pages/main/main';
+import { AstroProfile } from '~/pages/astro-profile/astro-profile';
 
 interface RouterConfigProps {
   user: UserDTO | null;
@@ -37,6 +38,10 @@ export const createRoutes = ({ user, authChecked }: RouterConfigProps): RouteObj
       {
         path: AppPath.PROFILE,
         element: <ProtectedRoute user={user} authChecked={authChecked} element={<Profile />} />,
+      },
+      {
+        path: AppPath.ASTROPROFILE,
+        element: <ProtectedRoute user={user} authChecked={authChecked} element={<AstroProfile />} />,
       },
       {
         path: AppPath.ANY,

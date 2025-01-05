@@ -3,6 +3,7 @@ const AppPath = {
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
   PROFILE: '/profile',
+  ASTROPROFILE: '/astro-profile',
   NOT_FOUND: '/not-found',
   ANY: '*',
 } as const;
