@@ -1,3 +1,5 @@
+import { PlanetaryPositionDTO } from '../planetary-positions/planetary-positions.model';
+
 type CelestialBody = {
   name: string;
   ra: number;
@@ -296,19 +298,66 @@ class SynastryScoreService {
     return 0;
   }
 
-  public calculateCompatibility(partner1: CelestialBody[], partner2: CelestialBody[]): number {
-    let totalScore = 0;
+  public calculateCompatibility(
+    partner1: PlanetaryPositionDTO,
+    partner2: PlanetaryPositionDTO,
+  ): { totalScore: number; categoryScores: { [key: number]: number } } {
+    const partner1Updated = this.mapToCelestialBodies(partner1);
+    const partner2Updated = this.mapToCelestialBodies(partner2);
 
-    for (const body1 of partner1) {
-      for (const body2 of partner2) {
+    let totalScore = 0;
+    const categoryScores: { [key: number]: number } = {
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0,
+      0: 0,
+      '-1': 0,
+      '-2': 0,
+      '-3': 0,
+      '-4': 0,
+    };
+
+    for (const body1 of partner1Updated) {
+      for (const body2 of partner2Updated) {
         const angle = this.calculateAngle(body1.ra, body2.ra);
         const aspectName = this.getAspectName(angle);
         const score = this.getPlanetaryAspectScore(body1.name, body2.name, aspectName);
         totalScore += score;
+
+        if (categoryScores[score] !== undefined) {
+          categoryScores[score] += 1;
+        }
       }
     }
 
-    return totalScore;
+    return { totalScore, categoryScores };
+  }
+
+  private mapToCelestialBodies(dto: PlanetaryPositionDTO): CelestialBody[] {
+    const celestialBodies: CelestialBody[] = [];
+
+    const planetaryMappings: { [key: string]: string } = {
+      Sun: dto.sunPosition,
+      Moon: dto.moonPosition,
+      Mercury: dto.mercury,
+      Venus: dto.venus,
+      Mars: dto.mars,
+      Jupiter: dto.jupiter,
+      Saturn: dto.saturn,
+      Uranus: dto.uranus,
+      Neptune: dto.neptune,
+      Pluto: dto.pluto,
+    };
+
+    for (const [name, position] of Object.entries(planetaryMappings)) {
+      if (position) {
+        const ra = parseFloat(position.split(',')[0]);
+        celestialBodies.push({ name, ra });
+      }
+    }
+
+    return celestialBodies;
   }
 }
 

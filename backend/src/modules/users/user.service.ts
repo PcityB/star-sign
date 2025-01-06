@@ -1,3 +1,4 @@
+import { PlanetaryPosition } from './../../../../node_modules/.prisma/client/index.d';
 import { encryption } from '~/libs/encryption/encryption';
 import { UserRepository } from './user.repository';
 import { token } from '~/libs/token/token';
@@ -5,11 +6,13 @@ import prisma from '~/libs/prisma/prisma-client';
 import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
 import { PlanetaryPositionService } from '../planetary-positions/planetary-positions.service';
 import { PreferenceService } from '../preferences/preference.service';
+import { SynastryScoreService } from '../synastry-score/synastry-score.service';
 
 class UserService {
   private userRepository = new UserRepository(prisma);
   private planetaryPositionService = new PlanetaryPositionService();
   private preferenceService = new PreferenceService();
+  private synastryScoreService = new SynastryScoreService();
 
   public async create(userPayload: SignUpRequestDTO) {
     if (await this.userRepository.findByEmail(userPayload.email)) {
@@ -56,6 +59,8 @@ class UserService {
   }
 
   public async getAllByPreferences(userId: number) {
+    const userPlanetaryPositions = (await this.getById(userId))?.PlanetaryPosition;
+
     const userPreferences = await this.preferenceService.getByUserId(userId);
     const users = await this.userRepository.findUsersWithPreferences({
       minAge: userPreferences?.minAge || 18,
@@ -67,10 +72,19 @@ class UserService {
       goals: userPreferences?.goals,
     });
 
-    return users.map((user) => this.selectUserFields(user));
+    return users.map((user) => {
+      if (!user.PlanetaryPosition) {
+        return this.selectUserFields(user);
+      }
+      const synastryScore = this.synastryScoreService.calculateCompatibility(
+        userPlanetaryPositions,
+        user.PlanetaryPosition,
+      );
+      return { ...this.selectUserFields(user), synastryScore };
+    });
   }
 
-  public async getById(id: string) {
+  public async getById(id: string | number) {
     const user = await this.userRepository.find(id);
     return user && !user.isDeleted ? this.selectUserFields(user) : null;
   }
