@@ -4,11 +4,12 @@ import { token } from '~/libs/token/token';
 import prisma from '~/libs/prisma/prisma-client';
 import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
 import { PlanetaryPositionService } from '../planetary-positions/planetary-positions.service';
-import { Gender } from 'shared/src';
+import { PreferenceService } from '../preferences/preference.service';
 
 class UserService {
   private userRepository = new UserRepository(prisma);
   private planetaryPositionService = new PlanetaryPositionService();
+  private preferenceService = new PreferenceService();
 
   public async create(userPayload: SignUpRequestDTO) {
     if (await this.userRepository.findByEmail(userPayload.email)) {
@@ -54,24 +55,22 @@ class UserService {
     return this.selectUserFields(updatedUser);
   }
 
-  public async getById(id: string) {
-    // const users = await this.userRepository.findUsersWithPreferences({
-    //   minAge: 18,
-    //   maxAge: 21,
-    //   gender: Gender.MALE,
-    //   currentCity: 'Abana',
-    //   currentCountry: 'Turkey',
-    //   sunSign: 'Capricorn',
-    //   goals: [],
-    // });
-    // console.log(users)
-    // console.log("1", await this.userRepository.findUsersWithPreferences({
-    //   minAge: 18,
-    //   maxAge: 21,
-    //   gender: Gender.MALE,
-    //   sunSign: 'Capricorn',
-    // }))
+  public async getAllByPreferences(userId: number) {
+    const userPreferences = await this.preferenceService.getByUserId(userId);
+    const users = await this.userRepository.findUsersWithPreferences({
+      minAge: userPreferences?.minAge || 18,
+      maxAge: userPreferences?.maxAge || 99,
+      gender: userPreferences?.gender,
+      currentCity: userPreferences?.currentCity,
+      currentCountry: userPreferences?.currentCountry,
+      sunSign: userPreferences?.sunSign,
+      goals: userPreferences?.goals,
+    });
 
+    return users.map((user) => this.selectUserFields(user));
+  }
+
+  public async getById(id: string) {
     const user = await this.userRepository.find(id);
     return user && !user.isDeleted ? this.selectUserFields(user) : null;
   }

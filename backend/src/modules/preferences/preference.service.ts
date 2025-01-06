@@ -14,7 +14,7 @@ class PreferenceService {
     return updatedPreference;
   }
 
-  public async getById(userId: number) {
+  public async getByUserId(userId: number) {
     return await this.preferenceRepository.findByUserId(userId);
   }
 }

@@ -1,1 +1,8 @@
-export { UserDTO, SignInRequestDTO, SignUpRequestDTO, UserPatchRequestDTO, PlanetaryPositionDTO } from 'shared/src';
+export {
+  UserDTO,
+  SignInRequestDTO,
+  SignUpRequestDTO,
+  UserPatchRequestDTO,
+  PlanetaryPositionDTO,
+  Gender,
+} from 'shared/src';

@@ -29,7 +29,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
     currentCity?: string;
     currentCountry?: string;
     sunSign?: string;
-    goals?: string[];
+    goals?: number[];
   }): Promise<UserDTO[]> {
     const { minAge, maxAge, gender, currentCity, currentCountry, sunSign, goals } = preferences;
 
@@ -52,7 +52,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
                 Preference: {
                   goals: {
                     some: {
-                      name: { in: goals },
+                      id: { in: goals },
                     },
                   },
                 },
