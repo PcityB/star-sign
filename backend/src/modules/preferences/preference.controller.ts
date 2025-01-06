@@ -2,7 +2,6 @@ import { AuthRequest } from '~/libs/middleware/auth.middleware';
 import { NextFunction, Request, Response } from 'express';
 import { BaseController } from '~/libs/core/base-controller';
 import { PreferenceService } from './preference.service';
-import { ImageService } from '../images/image.service';
 
 class PreferenceController extends BaseController {
   private preferenceService = new PreferenceService();

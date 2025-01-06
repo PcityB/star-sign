@@ -24,7 +24,10 @@ model User {
   updatedAt         DateTime            @updatedAt // Automatically update on record modification
   PlanetaryPosition PlanetaryPosition[]
   Preference        Preference?
-  isDeleted         Boolean  @default(false)
+  isDeleted         Boolean             @default(false)
+
+  matchesAsUser1 Match[] @relation("User1Matches")
+  matchesAsUser2 Match[] @relation("User2Matches")
 
   @@index([email]) // Index for faster lookups by email
   @@map("users") // Optional: map model to a specific table name (e.g., `users`)
@@ -55,18 +58,18 @@ model PlanetaryPosition {
 }
 
 model Preference {
-  id             Int       @id @default(autoincrement())
-  userId         Int       @unique
+  id             Int        @id @default(autoincrement())
+  userId         Int        @unique
   minAge         Int?
   maxAge         Int?
   currentCity    String?
   currentCountry String?
   gender         Gender?
   sunSign        String?
-  goals          Goal[]    @relation("PreferenceGoals")
+  goals          Goal[]     @relation("PreferenceGoals")
   interests      Interest[] @relation("PreferenceInterests")
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 
   user User @relation(fields: [userId], references: [id])
 
@@ -74,23 +77,40 @@ model Preference {
 }
 
 model Goal {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
   preferences Preference[] @relation("PreferenceGoals")
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   @@map("goals")
 }
 
 model Interest {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
   preferences Preference[] @relation("PreferenceInterests")
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   @@map("interests")
+}
+
+model Match {
+  id            Int      @id @default(autoincrement())
+  userId1       Int
+  userId2       Int
+  synastryScore Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isAccepted    Boolean  @default(false)
+  isDeleted     Boolean  @default(false)
+
+  user1 User @relation("User1Matches", fields: [userId1], references: [id])
+  user2 User @relation("User2Matches", fields: [userId2], references: [id])
+
+  @@index([userId1, userId2]) // Optional: to improve lookup performance
+  @@map("matches")
 }
 
 enum Gender {
