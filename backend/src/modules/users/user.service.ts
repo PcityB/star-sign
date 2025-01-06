@@ -4,6 +4,7 @@ import { token } from '~/libs/token/token';
 import prisma from '~/libs/prisma/prisma-client';
 import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
 import { PlanetaryPositionService } from '../planetary-positions/planetary-positions.service';
+import { Gender } from 'shared/src';
 
 class UserService {
   private userRepository = new UserRepository(prisma);
@@ -54,6 +55,23 @@ class UserService {
   }
 
   public async getById(id: string) {
+    // const users = await this.userRepository.findUsersWithPreferences({
+    //   minAge: 18,
+    //   maxAge: 21,
+    //   gender: Gender.MALE,
+    //   currentCity: 'Abana',
+    //   currentCountry: 'Turkey',
+    //   sunSign: 'Capricorn',
+    //   goals: [],
+    // });
+    // console.log(users)
+    // console.log("1", await this.userRepository.findUsersWithPreferences({
+    //   minAge: 18,
+    //   maxAge: 21,
+    //   gender: Gender.MALE,
+    //   sunSign: 'Capricorn',
+    // }))
+
     const user = await this.userRepository.find(id);
     return user && !user.isDeleted ? this.selectUserFields(user) : null;
   }

@@ -10,6 +10,11 @@
   color: var(--color-text-primary);
 }
 
+.profile-layout p{
+  margin: auto;
+  font-size: 16px;
+}
+
 .title {
   margin: 0;
   font-size: 30px;

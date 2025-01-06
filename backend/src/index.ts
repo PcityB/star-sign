@@ -13,9 +13,9 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use('/preferences', preferenceRoutes);
 app.use('/', userRoutes);
 app.use('/', attributeRoutes);
-app.use('/preferences', preferenceRoutes);
 
 app.use(errorHandler);
 

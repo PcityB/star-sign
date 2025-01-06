@@ -65,8 +65,8 @@ const AstroProfile = (): JSX.Element => {
             <div className={styles['profile-header-button']}>
               <Button label="Update Data" variant="outlined" />
             </div>
-            <p>No birth date and location specified.</p>
           </div>
+          <p>No birth date and location specified.</p>
         </div>
       </PageLayout>
     );
