@@ -21,10 +21,22 @@ export interface PreferenceDTO {
   currentCountry?: string;
   gender?: Gender;
   sunSign?: string;
-  goalsIds: number[];
-  interestsIds: number[];
+  goals: number[];
+  interests: number[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface CreatePreferenceDTO {
+  userId: number;
+  minAge?: number;
+  maxAge?: number;
+  currentCity?: string;
+  currentCountry?: string;
+  gender?: Gender;
+  sunSign?: string;
+  goals: number[];
+  interests: number[];
 }
 
 export enum Gender {

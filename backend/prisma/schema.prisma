@@ -69,6 +69,8 @@ model Preference {
   updatedAt      DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id])
+
+  @@map("preferences")
 }
 
 model Goal {
@@ -77,6 +79,8 @@ model Goal {
   preferences Preference[] @relation("PreferenceGoals")
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+
+  @@map("goals")
 }
 
 model Interest {
@@ -85,6 +89,8 @@ model Interest {
   preferences Preference[] @relation("PreferenceInterests")
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+
+  @@map("interests")
 }
 
 enum Gender {

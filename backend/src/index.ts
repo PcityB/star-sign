@@ -1,6 +1,7 @@
 import express from 'express';
 import userRoutes from './modules/users/user.route';
 import attributeRoutes from './modules/attributes/attribute.route';
+import preferenceRoutes from './modules/preferences/preference.route';
 import errorHandler from './libs/middleware/error.middleware';
 import cors from 'cors';
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use('/', userRoutes);
 app.use('/', attributeRoutes);
+app.use('/preferences', preferenceRoutes);
 
 app.use(errorHandler);
 
