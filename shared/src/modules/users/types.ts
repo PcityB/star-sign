@@ -9,12 +9,8 @@ export type UserDTO = {
   birthLatitude?: string;
   birthCity?: string;
   birthCountry?: string;
-  currentCity?: string;
-  currentCountry?: string;
   photos?: string[];
   description?: string;
-  minAge?: number;
-  maxAge?: number;
   createdAt: Date;
   updatedAt: Date;
   isDeleted?: boolean;
@@ -40,12 +36,8 @@ export type UserPatchRequestDTO = {
   birthLatitude?: string;
   birthCity?: string;
   birthCountry?: string;
-  currentCity?: string;
-  currentCountry?: string;
   photos?: File[] | string[];
   description?: string;
-  minAge?: number;
-  maxAge?: number;
   isDeleted?: boolean;
 };
 

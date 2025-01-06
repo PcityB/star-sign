@@ -47,12 +47,4 @@ export const UserPatchRequestSchema = z.object({
     .optional(),
 
   description: z.string().max(500, { message: 'Description must be at most 500 characters' }).optional(),
-
-  minAge: z.number().int().min(18, { message: 'Minimum age must be at least 18' }).optional(),
-
-  maxAge: z.number().int().max(100, { message: 'Maximum age must be at most 100' }).optional(),
-
-  currentCity: z.string().max(200, { message: 'Current city must be at most 200 characters' }).optional(),
-
-  currentCountry: z.string().max(200, { message: 'Current country must be at most 200 characters' }).optional(),
 });
