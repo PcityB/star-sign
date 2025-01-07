@@ -9,6 +9,9 @@ const ApiPath = {
 
   // Users routes
   USERS: '/users',
+
+  // Attributes routes
+  ATTRIBUTES: '/attributes',
 } as const;
 
 export { ApiPath };

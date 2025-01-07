@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use('/preferences', preferenceRoutes);
 app.use('/', userRoutes);
-app.use('/', attributeRoutes);
+app.use('/attributes', attributeRoutes);
 
 app.use(errorHandler);
 
