@@ -3,6 +3,7 @@ import { Auth } from './auth/auth.service';
 import { ApiPath } from '~/common/enums/enums';
 import { Users } from './users/users.service';
 import { Attributes } from './attributes/attribute.service';
+import { Matches } from './matches/match.service';
 
 const http = new Http();
 
@@ -21,4 +22,9 @@ const attributes = new Attributes({
   http,
 });
 
-export { http, auth, users, attributes };
+const matches = new Matches({
+  baseUrl: ApiPath.API_URL,
+  http,
+});
+
+export { http, auth, users, attributes, matches };

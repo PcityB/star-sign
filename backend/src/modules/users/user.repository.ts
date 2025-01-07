@@ -72,8 +72,6 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
 
     return users;
   }
-
-
 }
 
 export { UserRepository };

@@ -1,11 +1,11 @@
 import prisma from '~/libs/prisma/prisma-client';
 import { MatchRepository } from './match.repository';
-import { CreateMatchDTO } from './match.model';
+import { MatchCreateRequestDTO } from './match.model';
 
 class MatchService {
   private matchRepository = new MatchRepository(prisma);
 
-  public async create(match: CreateMatchDTO) {
+  public async create(match: MatchCreateRequestDTO) {
     return await this.matchRepository.create(match);
   }
 

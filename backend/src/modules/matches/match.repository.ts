@@ -1,18 +1,18 @@
 import { PrismaClient } from '@prisma/client';
-import { MatchDTO, CreateMatchDTO } from './match.model';
+import { MatchDTO, MatchCreateRequestDTO } from './match.model';
 import { BaseRepository } from '~/libs/core/base-repository';
 
 export class MatchRepository extends BaseRepository<
   MatchDTO,
   MatchDTO[],
-  Partial<CreateMatchDTO>,
-  Partial<CreateMatchDTO>
+  Partial<MatchCreateRequestDTO>,
+  Partial<MatchCreateRequestDTO>
 > {
   constructor(prisma: PrismaClient) {
     super(prisma, 'match');
   }
 
-  async createOrUpdate(data: Partial<CreateMatchDTO>): Promise<Partial<CreateMatchDTO>> {
+  async createOrUpdate(data: Partial<MatchCreateRequestDTO>): Promise<Partial<MatchCreateRequestDTO>> {
     const existingMatch = await this.prisma.match.findFirst({
       where: {
         OR: [

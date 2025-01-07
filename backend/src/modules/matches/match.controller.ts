@@ -36,12 +36,7 @@ class MatchController extends BaseController {
       const userId = req.user?.id as string;
       const matchId = req.params.id;
 
-      const preferenceData = {
-        ...req.body,
-        userId: +userId,
-      };
-
-      const updatedPreference = await this.matchService.accept(+matchId, preferenceData);
+      const updatedPreference = await this.matchService.accept(+matchId, +userId);
 
       this.sendResponse(res, { updatedPreference }, 200);
     });

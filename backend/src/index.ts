@@ -2,6 +2,7 @@ import express from 'express';
 import userRoutes from './modules/users/user.route';
 import attributeRoutes from './modules/attributes/attribute.route';
 import preferenceRoutes from './modules/preferences/preference.route';
+import matchRoutes from './modules/matches/match.route';
 import errorHandler from './libs/middleware/error.middleware';
 import cors from 'cors';
 
@@ -13,9 +14,10 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use('/preferences', preferenceRoutes);
 app.use('/', userRoutes);
+app.use('/preferences', preferenceRoutes);
 app.use('/attributes', attributeRoutes);
+app.use('/matches', matchRoutes);
 
 app.use(errorHandler);
 

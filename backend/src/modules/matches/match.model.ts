@@ -1,1 +1,1 @@
-export { MatchDTO, CreateMatchDTO } from 'shared/src';
+export { MatchDTO, MatchCreateRequestDTO } from 'shared/src';

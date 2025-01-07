@@ -12,6 +12,9 @@ const ApiPath = {
 
   // Attributes routes
   ATTRIBUTES: '/attributes',
+
+  // Matches routes
+  MATCHES: '/matches',
 } as const;
 
 export { ApiPath };

@@ -9,7 +9,7 @@ export type MatchDTO = {
   isDeleted: boolean; // Flag for logical deletion
 };
 
-export type CreateMatchDTO = {
+export type MatchCreateRequestDTO = {
   userId1: number; // ID of the first user
   userId2: number; // ID of the second user
   synastryScore?: number; // Synastry score between the two users
