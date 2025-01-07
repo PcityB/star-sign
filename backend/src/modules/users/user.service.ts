@@ -59,16 +59,23 @@ class UserService {
   }
 
   public async getAllByPreferences(userId: number) {
-    const userPlanetaryPositions = (await this.getById(userId))?.PlanetaryPosition;
+    const user = await this.userRepository.find(userId);
+    const userPlanetaryPositions = user?.PlanetaryPosition;
+
+    if (!userPlanetaryPositions) {
+      return [];
+    }
 
     const userPreferences = await this.preferenceService.getByUserId(userId);
     const users = await this.userRepository.findUsersWithPreferences({
       minAge: userPreferences?.minAge || 18,
       maxAge: userPreferences?.maxAge || 99,
+      userGender: user?.gender,
       gender: userPreferences?.gender,
       currentCity: userPreferences?.currentCity,
       currentCountry: userPreferences?.currentCountry,
       sunSign: userPreferences?.sunSign,
+      moonSign: userPreferences?.moonSign,
       goals: userPreferences?.goals,
     });
 

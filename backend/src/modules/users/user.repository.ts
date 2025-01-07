@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
+import { Gender, SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
 import { BaseRepository } from '~/libs/core/base-repository';
 
 class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO, UserPatchRequestDTO> {
@@ -31,6 +31,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
   public async findUsersWithPreferences(preferences: {
     minAge: number;
     maxAge: number;
+    userGender?: Gender | null;
     gender?: string;
     currentCity?: string;
     currentCountry?: string;
@@ -38,7 +39,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
     moonSign?: string;
     goals?: number[];
   }): Promise<UserDTO[]> {
-    const { minAge, maxAge, gender, currentCity, currentCountry, sunSign, moonSign, goals } = preferences;
+    const { minAge, maxAge, userGender, gender, currentCity, currentCountry, sunSign, moonSign, goals } = preferences;
 
     const users = await this.prisma.user.findMany({
       where: {
@@ -66,6 +67,13 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
                 },
               }
             : {},
+            userGender
+              ? {
+                  Preference: {
+                    gender: userGender,
+                  },
+                }
+              : {},
         ],
       },
       include: {

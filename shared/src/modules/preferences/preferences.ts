@@ -30,13 +30,13 @@ export interface PreferenceDTO {
 
 export interface PreferenceCreateRequestDTO {
   userId: number;
-  minAge?: number;
-  maxAge?: number;
-  currentCity?: string;
-  currentCountry?: string;
-  gender?: Gender;
-  sunSign?: string;
-  moonSign?: string;
+  minAge?: number | null;
+  maxAge?: number | null;
+  currentCity?: string | null;
+  currentCountry?: string | null;
+  gender?: Gender | null;
+  sunSign?: string | null;
+  moonSign?: string | null;
   goals?: number[];
   interests?: number[];
 }

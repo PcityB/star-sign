@@ -1,5 +1,5 @@
-import { actions as usersActions } from '~/store/users/users.js';
 import { actions as attributesActions } from '~/store/attributes/attributes.js';
+import { actions as preferenceActions } from '~/store/preferences/preferences.js';
 import styles from './styles.module.css';
 import { useAppDispatch, useAppForm, useAppSelector } from '~/hooks/hooks';
 import { PreferenceCreateRequestDTO, PreferenceCreateRequestSchema, UserDTO } from 'shared/src';
@@ -49,7 +49,7 @@ const EditPreferencesForm = ({ user }: Properties): JSX.Element => {
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
       void handleSubmit(async (formData: PreferenceCreateRequestDTO) => {
-        void dispatch(usersActions.update({ id: user.id.toString(), data: formData }));
+        void dispatch(preferenceActions.update({data: formData}));
       })(event_);
     },
     [dispatch, handleSubmit, user.id],
