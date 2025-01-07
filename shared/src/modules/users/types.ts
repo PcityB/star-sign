@@ -86,6 +86,7 @@ export type UserWithMatchScoreDTO = {
   updatedAt: Date;
   isDeleted?: boolean;
   PlanetaryPosition?: PlanetaryPositionDTO;
+  Preference?: PreferenceDTO;
   matchScore: MatchScoreDTO;
 };
 
