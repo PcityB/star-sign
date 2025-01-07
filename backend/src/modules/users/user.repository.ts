@@ -51,29 +51,33 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
               lte: new Date(new Date().setFullYear(new Date().getFullYear() - minAge)),
             },
           },
-          gender ? { gender } : {},
-          currentCity ? { birthCity: currentCity } : {},
-          currentCountry ? { birthCountry: currentCountry } : {},
-          sunSign ? { PlanetaryPosition: { some: { sunSign } } } : {},
-          moonSign ? { PlanetaryPosition: { some: { moonSign } } } : {},
-          goals && goals.length > 0
-            ? {
-                Preference: {
-                  goals: {
-                    some: {
-                      id: { in: goals },
+          ...(gender ? [{ gender }] : []),
+          ...(currentCity ? [{ birthCity: currentCity }] : []),
+          ...(currentCountry ? [{ birthCountry: currentCountry }] : []),
+          ...(sunSign ? [{ PlanetaryPosition: { some: { sunSign } } }] : []),
+          ...(moonSign ? [{ PlanetaryPosition: { some: { moonSign } } }] : []),
+          ...(goals && goals.length > 0
+            ? [
+                {
+                  Preference: {
+                    goals: {
+                      some: {
+                        id: { in: goals },
+                      },
                     },
                   },
                 },
-              }
-            : {},
-            userGender
-              ? {
+              ]
+            : []),
+          ...(userGender
+            ? [
+                {
                   Preference: {
                     gender: userGender,
                   },
-                }
-              : {},
+                },
+              ]
+            : []),
         ],
       },
       include: {

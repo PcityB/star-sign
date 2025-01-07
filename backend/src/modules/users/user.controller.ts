@@ -86,7 +86,7 @@ class UserController extends BaseController {
     this.handleRequest(req, res, next, async (req: AuthRequest, res: Response) => {
       const userId = req.user?.id as string;
 
-      const users = this.userService.getAllByPreferences(+userId);
+      const users = await this.userService.getAllByPreferences(+userId);
 
       this.sendResponse(res, { users }, 200);
     });
