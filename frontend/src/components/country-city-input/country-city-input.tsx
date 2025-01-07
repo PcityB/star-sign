@@ -45,12 +45,13 @@ export const CountryCityInput = <T extends FieldValues>({
     const fetchCountries = async () => {
       try {
         const countries = await Country.getAllCountries();
-        setCountryOptions(
-          countries.map((country: ICountry) => ({
+        setCountryOptions([
+          { label: 'All', value: '' },
+          ...countries.map((country: ICountry) => ({
             label: country.name,
             value: country.isoCode,
           })),
-        );
+        ]);
       } catch (error) {
         console.error('Error fetching countries:', error);
       }
@@ -66,10 +67,13 @@ export const CountryCityInput = <T extends FieldValues>({
           const cities = await City.getCitiesOfCountry(selectedCountry);
           setCityOptions(
             cities
-              ? cities.map((city: ICity) => ({
-                  label: city.name,
-                  value: city.name,
-                }))
+              ? [
+                  { label: 'All', value: '' },
+                  ...cities.map((city: ICity) => ({
+                    label: city.name,
+                    value: city.name,
+                  })),
+                ]
               : [],
           );
         } catch (error) {
