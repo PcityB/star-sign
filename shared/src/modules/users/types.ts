@@ -65,3 +65,30 @@ export type PlanetaryPositionDTO = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type UserWithMatchScoreDTO = {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  gender?: string | null;
+  birthTimestamp?: Date | null;
+  birthLongitude?: string | null;
+  birthLatitude?: string | null;
+  birthCity?: string | null;
+  birthCountry?: string | null;
+  photos?: string[];
+  description?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  isDeleted?: boolean;
+  PlanetaryPosition?: PlanetaryPositionDTO;
+  matchScore: MatchScoreDTO;
+};
+
+export type MatchScoreDTO = {
+  totalScore: number;
+  categoryScores: {
+    [key: string]: number;
+  };
+};

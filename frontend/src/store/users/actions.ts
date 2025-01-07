@@ -1,13 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { name } from './slice';
-import { AsyncThunkConfig, UserPatchRequestDTO } from '~/common/types/types';
+import { AsyncThunkConfig, UserPatchRequestDTO, UserWithMatchScoreDTO } from '~/common/types/types';
 import { actions as authActions } from '~/store/auth/auth';
 
 const update = createAsyncThunk<void, { id: string; data: UserPatchRequestDTO }, AsyncThunkConfig>(
   `${name}/update`,
   async ({ id, data }, { dispatch, extra: { usersService } }) => {
     await usersService.update(id, data);
-    await dispatch(authActions.fetchAuthenticatedUser());
+    setTimeout(async () => {
+      await dispatch(authActions.fetchAuthenticatedUser());
+    }, 100);
   },
 );
 
@@ -20,4 +22,11 @@ const deleteCurrentUser = createAsyncThunk<void, undefined, AsyncThunkConfig>(
   },
 );
 
-export { update, deleteCurrentUser };
+const getAllByPreference = createAsyncThunk<UserWithMatchScoreDTO[], undefined, AsyncThunkConfig>(
+  `${name}/get-all-by-preference`,
+  async (_, { extra: { usersService } }) => {
+    return await usersService.getAllByPreference();
+  },
+);
+
+export { update, deleteCurrentUser, getAllByPreference };

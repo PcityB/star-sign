@@ -1,4 +1,4 @@
-import { UserDTO, UserPatchRequestDTO } from '~/common/types/types';
+import { UserDTO, UserPatchRequestDTO, UserWithMatchScoreDTO } from '~/common/types/types';
 import { ApiPath } from '../../common/enums/enums';
 import { getToken } from '../../utils/auth';
 import { Http } from '../http/http.service';
@@ -45,6 +45,15 @@ class Users {
 
     return this.http.load(this.getUrl(), {
       method: 'DELETE',
+      token,
+    });
+  }
+
+  public getAllByPreference(): Promise<UserWithMatchScoreDTO[]> {
+    const token = getToken();
+
+    return this.http.load(this.getUrl(), {
+      method: 'GET',
       token,
     });
   }

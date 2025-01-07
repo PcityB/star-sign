@@ -36,7 +36,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
     const users = await this.prisma.user.findMany({
       where: {
         AND: [
-          { birthTimestamp: { not: null } }, // Ensure birthTimestamp exists
+          { birthTimestamp: { not: null } },
           {
             birthTimestamp: {
               gte: new Date(new Date().setFullYear(new Date().getFullYear() - maxAge)),
