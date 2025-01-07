@@ -15,6 +15,9 @@ const ApiPath = {
 
   // Matches routes
   MATCHES: '/matches',
+
+  // Preferences routes
+  PREFERENCES: '/preferences',
 } as const;
 
 export { ApiPath };

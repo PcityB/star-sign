@@ -4,6 +4,7 @@ import { ApiPath } from '~/common/enums/enums';
 import { Users } from './users/users.service';
 import { Attributes } from './attributes/attribute.service';
 import { Matches } from './matches/match.service';
+import { Preferences } from './preferences/preference.service';
 
 const http = new Http();
 
@@ -27,4 +28,9 @@ const matches = new Matches({
   http,
 });
 
-export { http, auth, users, attributes, matches };
+const preferences = new Preferences({
+  baseUrl: ApiPath.API_URL,
+  http,
+});
+
+export { http, auth, users, attributes, matches, preferences };

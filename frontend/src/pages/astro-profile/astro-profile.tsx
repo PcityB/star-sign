@@ -1,4 +1,4 @@
-import { Button, Loader, PageLayout } from '~/components/components';
+import { Button, Loader, NavLink, PageLayout } from '~/components/components';
 import styles from './styles.module.css';
 import { useAppSelector } from '~/hooks/hooks';
 import {
@@ -15,6 +15,8 @@ import {
   TbZodiacAquarius,
   TbZodiacPisces,
 } from 'react-icons/tb';
+import { AppPath } from '~/common/enums/enums';
+import { useNavigate } from 'react-router-dom';
 
 // Map zodiac signs to their corresponding icons and styles
 const zodiacMap = {
@@ -112,6 +114,12 @@ const AstroProfile = (): JSX.Element => {
     );
   };
 
+  const navigate = useNavigate();
+
+  const handleRedirectToProfile = () => {
+    navigate(AppPath.PROFILE);
+  };
+
   return (
     <PageLayout>
       <div className={styles['profile-layout']}>
@@ -120,7 +128,7 @@ const AstroProfile = (): JSX.Element => {
             <h1 className={styles['title']}>Your Astrological Profile</h1>
           </div>
           <div className={styles['profile-header-button']}>
-            <Button label="Update Data" variant="outlined" />
+            <Button label="Update Data" variant="outlined" onClick={handleRedirectToProfile} />
           </div>
         </div>
         <div className={styles['profile-cards']}>

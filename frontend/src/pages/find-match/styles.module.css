@@ -1,0 +1,127 @@
+.profile-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0;
+  margin: 0 auto;
+  color: var(--color-text-primary);
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 120%;
+}
+
+.profile-header {
+  display: flex; /* Enable flexbox layout */
+  align-items: center; /* Vertically center the elements */
+  justify-content: space-between; /* Distribute space: one item left and one right */
+  position: relative;
+  width: 100%;
+}
+
+.profile-header-title {
+  margin: 0 auto; /* Center the item horizontally in flex container */
+  position: absolute; /* Override the flex alignment for this element */
+  left: 50%; /* Move it to the center of the container */
+  transform: translateX(-50%); /* Adjust to align it perfectly to the center */
+}
+
+.profile-header-button {
+  margin-left: auto;
+  width: 15%;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.profile-image-wrapper {
+  width: 500px;
+  height: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.profile-image-wrapper svg {
+  font-size: 100px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-text h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+.profile-text h1 {
+  font-weight: 400;
+}
+
+.profile-text h2,
+h3 {
+  color: var(--color-text-secondary);
+}
+
+.divider {
+  min-width: 100%;
+  height: 1px;
+  background: var(--color-border-primary);
+}
+
+.portfolio-placeholder {
+  margin: 0;
+}
+
+.profile-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.profile-text-block h2,
+.profile-text-block h3 {
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.profile-text-block h2 {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.profile-text-block h3 {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.profile-text-block p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  max-width: 460px;
+}
