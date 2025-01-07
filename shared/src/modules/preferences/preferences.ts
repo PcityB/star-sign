@@ -21,13 +21,14 @@ export interface PreferenceDTO {
   currentCountry?: string;
   gender?: Gender;
   sunSign?: string;
+  moonSign?: string;
   goals: number[];
   interests: number[];
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface CreatePreferenceDTO {
+export interface PreferenceCreateRequestDTO {
   userId: number;
   minAge?: number;
   maxAge?: number;
@@ -35,8 +36,9 @@ export interface CreatePreferenceDTO {
   currentCountry?: string;
   gender?: Gender;
   sunSign?: string;
-  goals: number[];
-  interests: number[];
+  moonSign?: string;
+  goals?: number[];
+  interests?: number[];
 }
 
 export enum Gender {
@@ -44,3 +46,18 @@ export enum Gender {
   FEMALE = 'female',
   OTHER = 'other',
 }
+
+import { z } from 'zod';
+
+export const PreferenceCreateRequestSchema = z.object({
+  userId: z.number(),
+  minAge: z.number().optional(),
+  maxAge: z.number().optional(),
+  currentCity: z.string().optional(),
+  currentCountry: z.string().optional(),
+  gender: z.enum(['male', 'female', 'other']).optional(),
+  sunSign: z.string().optional(),
+  moonSign: z.string().optional(),
+  goals: z.array(z.number()),
+  interests: z.array(z.number()),
+});

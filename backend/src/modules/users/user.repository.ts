@@ -18,6 +18,12 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
       where: { id: Number(id) },
       include: {
         PlanetaryPosition: true,
+        Preference: {
+          include: {
+            goals: true,
+            interests: true,
+          },
+        },
       },
     }) as Promise<UserDTO | null>;
   }
@@ -29,9 +35,10 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
     currentCity?: string;
     currentCountry?: string;
     sunSign?: string;
+    moonSign?: string;
     goals?: number[];
   }): Promise<UserDTO[]> {
-    const { minAge, maxAge, gender, currentCity, currentCountry, sunSign, goals } = preferences;
+    const { minAge, maxAge, gender, currentCity, currentCountry, sunSign, moonSign, goals } = preferences;
 
     const users = await this.prisma.user.findMany({
       where: {
@@ -47,6 +54,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
           currentCity ? { birthCity: currentCity } : {},
           currentCountry ? { birthCountry: currentCountry } : {},
           sunSign ? { PlanetaryPosition: { some: { sunSign } } } : {},
+          moonSign ? { PlanetaryPosition: { some: { moonSign } } } : {},
           goals && goals.length > 0
             ? {
                 Preference: {

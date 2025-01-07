@@ -66,6 +66,7 @@ model Preference {
   currentCountry String?
   gender         Gender?
   sunSign        String?
+  moonSign       String?
   goals          Goal[]     @relation("PreferenceGoals")
   interests      Interest[] @relation("PreferenceInterests")
   createdAt      DateTime   @default(now())

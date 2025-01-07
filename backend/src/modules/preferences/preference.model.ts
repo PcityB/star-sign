@@ -1,1 +1,1 @@
-export { PreferenceDTO, CreatePreferenceDTO } from 'shared/src';
+export { PreferenceDTO, PreferenceCreateRequestDTO } from 'shared/src';

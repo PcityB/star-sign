@@ -1,3 +1,5 @@
+import { PreferenceDTO } from '../preferences/preferences';
+
 export type UserDTO = {
   id: number;
   name: string;
@@ -15,6 +17,7 @@ export type UserDTO = {
   updatedAt: Date;
   isDeleted?: boolean;
   PlanetaryPosition?: PlanetaryPositionDTO;
+  Preference?: PreferenceDTO;
 };
 
 export type SignInRequestDTO = {

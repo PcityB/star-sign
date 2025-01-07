@@ -1,18 +1,18 @@
 import { PrismaClient } from '@prisma/client';
-import { CreatePreferenceDTO, PreferenceDTO } from './preference.model';
+import { PreferenceCreateRequestDTO, PreferenceDTO } from './preference.model';
 import { BaseRepository } from '~/libs/core/base-repository';
 
 export class PreferenceRepository extends BaseRepository<
   PreferenceDTO,
   PreferenceDTO[],
-  Partial<CreatePreferenceDTO>,
-  Partial<CreatePreferenceDTO>
+  Partial<PreferenceCreateRequestDTO>,
+  Partial<PreferenceCreateRequestDTO>
 > {
   constructor(prisma: PrismaClient) {
     super(prisma, 'preference');
   }
 
-  async createOrUpdate(data: Partial<CreatePreferenceDTO>): Promise<Partial<CreatePreferenceDTO>> {
+  async createOrUpdate(data: Partial<PreferenceCreateRequestDTO>): Promise<Partial<PreferenceCreateRequestDTO>> {
     const existingPreference = await this.prisma.preference.findFirst({
       where: { userId: data.userId },
     });
