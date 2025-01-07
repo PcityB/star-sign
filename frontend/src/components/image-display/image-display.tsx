@@ -36,13 +36,12 @@ const ImageDisplay: React.FC<ImageSliderProps> = ({ url, images }) => {
           </NavLink>
         ))}
       </div>
-
-      <button onClick={handlePrev} className={`${styles.navButton} ${styles.leftButton}`}>
-        <IoChevronBackCircleSharp size={30} />
-      </button>
-      <button onClick={handleNext} className={`${styles.navButton} ${styles.rightButton}`}>
-        <IoChevronForwardCircleSharp size={30} />
-      </button>
+      <IoChevronBackCircleSharp size={30} onClick={handlePrev} className={`${styles.navButton} ${styles.leftButton}`} />
+      <IoChevronForwardCircleSharp
+        size={30}
+        onClick={handleNext}
+        className={`${styles.navButton} ${styles.rightButton}`}
+      />
 
       <div className={styles.dotsContainer}>
         {images.map((_, index) => (

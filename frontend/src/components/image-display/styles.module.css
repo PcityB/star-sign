@@ -26,27 +26,23 @@
   object-fit: cover;
 }
 
+/* Navigation buttons */
 .navButton {
   position: absolute;
   top: 50%;
   border: none;
-  border-radius: 50%;
   padding: 0;
   cursor: pointer;
   z-index: 3;
   opacity: 0;
-  visibility: hidden;
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
-  width: 30px;
-  height: 30px;
-  color: gray;
+  color: var(--color-brand-primary);
 }
 
 .container:hover .navButton {
   opacity: 1;
-  visibility: visible;
 }
 
 .leftButton {

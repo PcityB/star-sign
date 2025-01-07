@@ -13,8 +13,8 @@ export interface UsersState {
 }
 
 const initialState: UsersState = {
-  status: DataStatus.IDLE,
   users: [],
+  status: DataStatus.IDLE,
   updateStatus: DataStatus.IDLE,
   deleteStatus: DataStatus.IDLE,
   error: { code: undefined, message: undefined },

@@ -88,7 +88,7 @@ class UserController extends BaseController {
 
       const users = await this.userService.getAllByPreferences(+userId);
 
-      this.sendResponse(res, { users }, 200);
+      this.sendResponse(res, users, 200);
     });
 }
 

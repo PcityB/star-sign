@@ -49,7 +49,7 @@ const EditPreferencesForm = ({ user }: Properties): JSX.Element => {
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
       void handleSubmit(async (formData: PreferenceCreateRequestDTO) => {
-        void dispatch(preferenceActions.update({data: formData}));
+        void dispatch(preferenceActions.update({ data: formData }));
       })(event_);
     },
     [dispatch, handleSubmit, user.id],

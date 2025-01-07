@@ -60,7 +60,7 @@ class UserService {
 
   public async getAllByPreferences(userId: number) {
     const user = await this.userRepository.find(userId);
-    const userPlanetaryPositions = user?.PlanetaryPosition;
+    const userPlanetaryPositions = user?.PlanetaryPosition[0];
 
     if (!userPlanetaryPositions) {
       return [];
@@ -81,13 +81,13 @@ class UserService {
 
     return users.map((user) => {
       if (!user.PlanetaryPosition) {
-        return this.selectUserFields(user);
+        return;
       }
-      const synastryScore = this.synastryScoreService.calculateCompatibility(
+      const matchScore = this.synastryScoreService.calculateCompatibility(
         userPlanetaryPositions,
-        user.PlanetaryPosition,
+        user.PlanetaryPosition[0],
       );
-      return { ...this.selectUserFields(user), synastryScore };
+      return { ...this.selectUserFields(user), matchScore };
     });
   }
 
