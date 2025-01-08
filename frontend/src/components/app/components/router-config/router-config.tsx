@@ -9,6 +9,7 @@ import { Profile } from '~/pages/profile/profile';
 import { Main } from '~/pages/main/main';
 import { AstroProfile } from '~/pages/astro-profile/astro-profile';
 import { FindMatch } from '~/pages/find-match/find-match';
+import { MutualMatches } from '~/pages/mutual-matches/mutual-matches';
 
 interface RouterConfigProps {
   user: UserDTO | null;
@@ -47,6 +48,10 @@ export const createRoutes = ({ user, authChecked }: RouterConfigProps): RouteObj
       {
         path: AppPath.FIND_MATCH,
         element: <ProtectedRoute user={user} authChecked={authChecked} element={<FindMatch />} />,
+      },
+      {
+        path: AppPath.MUTUAL_MATCHES,
+        element: <ProtectedRoute user={user} authChecked={authChecked} element={<MutualMatches />} />,
       },
       {
         path: AppPath.ANY,

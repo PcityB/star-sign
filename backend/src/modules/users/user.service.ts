@@ -66,8 +66,8 @@ class UserService {
       return [];
     }
     const userPreferences = await this.preferenceService.getByUserId(userId);
-    const goalIds = userPreferences?.goals?.map(goal => goal.id) || [];
-    
+    const goalIds = userPreferences?.goals?.map((goal) => goal.id) || [];
+
     const users = await this.userRepository.findUsersWithPreferences({
       minAge: userPreferences?.minAge || 18,
       maxAge: userPreferences?.maxAge || 99,
@@ -79,7 +79,7 @@ class UserService {
       moonSign: userPreferences?.moonSign,
       goals: goalIds,
     });
-    
+
     return users.map((user) => {
       if (!user.PlanetaryPosition) {
         return;
@@ -113,7 +113,7 @@ class UserService {
       createdAt,
       updatedAt,
       PlanetaryPosition,
-      Preference
+      Preference,
     } = user;
 
     return {

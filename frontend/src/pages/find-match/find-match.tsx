@@ -29,12 +29,15 @@ const FindMatch = (): JSX.Element => {
 
   useEffect(() => {
     if (matches && Array.isArray(matches) && user && matchesStatus === DataStatus.SUCCESS) {
-      const liked = matches.reduce((acc, match) => {
-        if (+match.userId1 == +user.id && !match.isDeleted) {
-          acc[match.userId2] = true;
-        }
-        return acc;
-      }, {} as Record<number, boolean>);
+      const liked = matches.reduce(
+        (acc, match) => {
+          if (+match.userId1 == +user.id && !match.isDeleted) {
+            acc[match.userId2] = true;
+          }
+          return acc;
+        },
+        {} as Record<number, boolean>,
+      );
       setLikedUsers(liked);
     }
   }, [matches, user]);
@@ -68,9 +71,7 @@ const FindMatch = (): JSX.Element => {
   const toggleLike = (index: number, synastryScore: number) => {
     const isLiked = likedUsers[index];
     if (isLiked) {
-      const match = matches.find(
-        (match) => match.userId1 === user.id && match.userId2 === index && !match.isDeleted
-      );
+      const match = matches.find((match) => match.userId1 === user.id && match.userId2 === index && !match.isDeleted);
       if (match) {
         setLikedUsers((prev) => ({ ...prev, [index]: false }));
         void dispatch(matchActions.deleteMatch({ id: match.id.toString() }));
@@ -80,8 +81,7 @@ const FindMatch = (): JSX.Element => {
       void dispatch(matchActions.createMatch({ userId1: user.id, userId2: index, synastryScore }));
     }
     // setLikedUsers((prev) => ({ ...prev, [index]: !prev[index] }));
-  }
-  
+  };
 
   const getCardClass = (index: number): string => {
     if (index === centerIndex) return styles.centerCard;
@@ -109,10 +109,7 @@ const FindMatch = (): JSX.Element => {
                 const isLiked = likedUsers[user.id];
 
                 return (
-                  <div
-                    key={user.id}
-                    className={`${styles.cardWrapper} ${cardClass}`}
-                  >
+                  <div key={user.id} className={`${styles.cardWrapper} ${cardClass}`}>
                     {/* Heart Icon */}
                     <div
                       className={`${styles.heartIcon} ${isLiked ? styles.heartLiked : ''}`}

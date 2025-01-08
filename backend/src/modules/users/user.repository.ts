@@ -101,7 +101,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
         Preference: {
           include: {
             goals: true,
-            interests: true
+            interests: true,
           },
         },
       },

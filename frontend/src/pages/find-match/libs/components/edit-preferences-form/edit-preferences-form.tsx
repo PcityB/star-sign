@@ -42,8 +42,8 @@ const EditPreferencesForm = ({ user }: Properties): JSX.Element => {
       gender,
       sunSign: sunSign || '',
       moonSign: moonSign || '',
-      goals: userGoals?.map(goal => goal.id) || [],
-      interests: userInterests?.map(interest => interest.id) || [],
+      goals: userGoals?.map((goal) => goal.id) || [],
+      interests: userInterests?.map((interest) => interest.id) || [],
     },
     validationSchema: PreferenceCreateRequestSchema,
   });
