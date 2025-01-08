@@ -26,8 +26,10 @@ model User {
   Preference        Preference?
   isDeleted         Boolean             @default(false)
 
-  matchesAsUser1 Match[] @relation("User1Matches")
-  matchesAsUser2 Match[] @relation("User2Matches")
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+  matchesAsUser1   Match[]   @relation("User1Matches")
+  matchesAsUser2   Match[]   @relation("User2Matches")
 
   @@index([email]) // Index for faster lookups by email
   @@map("users") // Optional: map model to a specific table name (e.g., `users`)
@@ -112,6 +114,20 @@ model Match {
 
   @@index([userId1, userId2]) // Optional: to improve lookup performance
   @@map("matches")
+}
+
+model Message {
+  id          Int      @id @default(autoincrement())
+  senderId    Int
+  recipientId Int
+  content     String
+  createdAt   DateTime @default(now())
+
+  sender    User @relation("SentMessages", fields: [senderId], references: [id])
+  recipient User @relation("ReceivedMessages", fields: [recipientId], references: [id])
+
+  @@index([senderId, recipientId])
+  @@map("messages")
 }
 
 enum Gender {

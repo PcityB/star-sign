@@ -3,6 +3,7 @@ import { reducer as usersReducer } from './users/users';
 import { reducer as attributeReducer } from './attributes/attributes';
 import { reducer as matchReducer } from './matches/matches';
 import { reducer as preferenceReducer } from './preferences/preferences';
+import chatReducer from './chat/slice';
 
 const rootReducer = {
   auth: authReducer,
@@ -10,6 +11,7 @@ const rootReducer = {
   attributes: attributeReducer,
   matches: matchReducer,
   preference: preferenceReducer,
+  chat: chatReducer,
 };
 
 export { rootReducer };
