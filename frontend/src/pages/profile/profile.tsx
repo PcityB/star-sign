@@ -53,7 +53,7 @@ const Profile = (): JSX.Element => {
         <div className={styles['profile-info']}>
           <div className={styles['profile-image-wrapper']}>
             {user.photos?.length ? (
-              <div className={styles['profile-portfolio']}>
+              <div className={styles['profile-image']}>
                 <ImageDisplay images={user.photos} />
               </div>
             ) : (

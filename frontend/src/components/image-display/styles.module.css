@@ -1,7 +1,8 @@
 .container {
   position: relative;
   overflow: hidden;
-  border-radius: 14px;
+  border-top-left-radius: 14px; /* Optional: Maintain container's rounded corners */
+  border-top-right-radius: 14px; /* Optional: Maintain container's rounded corners */
   width: 100%;
   z-index: 2;
 }
@@ -23,7 +24,8 @@
   width: 100%; /* Take up the full width of the parent container */
   height: 100%; /* Adjust height to match the container */
   object-fit: contain; /* Preserve aspect ratio and fit within the container */
-  border-radius: 14px; /* Optional: Maintain container's rounded corners */
+  border-top-left-radius: 14px; /* Optional: Maintain container's rounded corners */
+  border-top-right-radius: 14px; /* Optional: Maintain container's rounded corners */
 }
 
 /* Navigation buttons */
