@@ -19,7 +19,7 @@ class MatchController extends BaseController {
 
       const match = await this.matchService.create(matchData);
 
-      this.sendResponse(res, { match }, 201);
+      this.sendResponse(res, match, 201);
     });
 
   public getByUserId = (req: Request, res: Response, next: NextFunction) =>
@@ -28,7 +28,7 @@ class MatchController extends BaseController {
 
       const matches = await this.matchService.getByUserId(+userId);
 
-      this.sendResponse(res, { matches }, 200);
+      this.sendResponse(res, matches, 200);
     });
 
   public accept = (req: Request, res: Response, next: NextFunction) =>
@@ -46,7 +46,7 @@ class MatchController extends BaseController {
       const userId = req.user?.id as string;
       const matchId = req.params.id;
 
-      await this.matchService.accept(+matchId, +userId);
+      await this.matchService.delete(+matchId, +userId);
 
       this.sendResponse(res, true, 200);
     });

@@ -1,6 +1,6 @@
 .card {
   width: 400px;
-  height: 700px;
+  height: auto;
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #fff;
@@ -16,7 +16,6 @@
 }
 
 .centerCard {
-  transform: scale(1.02);
   opacity: 1;
 }
 
@@ -26,7 +25,8 @@
 
 .profile-image-wrapper {
   width: 400px;
-  height: 600px;
+  min-height: 533.3px;
+  height: auto;
   overflow: hidden;
   display: flex;
   align-items: center;

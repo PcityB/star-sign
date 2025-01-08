@@ -28,7 +28,7 @@ class MatchService {
 
   public async delete(matchId: number, userId: number) {
     const match = await this.matchRepository.find(matchId);
-    if (!match || match.userId1 !== userId || match.userId2 !== userId) {
+    if (!match || (match.userId1 !== userId && match.userId2 !== userId)) {
       throw { status: 403, errors: 'You cannot delete this match.' };
     }
     return await this.matchRepository.delete(matchId);

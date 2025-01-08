@@ -8,8 +8,8 @@ const rootReducer = {
   auth: authReducer,
   users: usersReducer,
   attributes: attributeReducer,
-  matchReducer,
-  preferenceReducer,
+  matches: matchReducer,
+  preference: preferenceReducer,
 };
 
 export { rootReducer };
