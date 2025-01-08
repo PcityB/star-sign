@@ -43,9 +43,8 @@ const FindMatch = (): JSX.Element => {
 
   const handleDoubleClick = (user: any) => {
     console.log('Double-clicked:', user);
-    // Move the center card to the next one if not at the end of the list
     if (centerIndex + 1 < users.length) {
-      setCenterIndex(centerIndex + 1); // Increment the centerIndex
+      setCenterIndex(centerIndex + 1);
     }
   };
 
@@ -53,7 +52,7 @@ const FindMatch = (): JSX.Element => {
     if (index === centerIndex) return styles.centerCard;
     if (index === centerIndex - 1) return styles.leftCard;
     if (index === centerIndex + 1) return styles.rightCard;
-    return styles.hiddenCard; // Hide other cards
+    return styles.hiddenCard;
   };
 
   return (
@@ -90,13 +89,11 @@ const FindMatch = (): JSX.Element => {
                   </div>
                 );
               })}
-              {/* Placeholder for the right side if no next card */}
               {centerIndex + 1 >= users.length && (
                 <div className={`${styles.cardWrapper} ${styles.rightCard} ${styles.emptyCard}`}>
                   <div className={styles.placeholder}>No more matches</div>
                 </div>
               )}
-              {/* Placeholder for the left side if at the first card */}
               {centerIndex === 0 && <div className={`${styles.cardWrapper} ${styles.leftCard} ${styles.hiddenCard}`} />}
             </>
           ) : (

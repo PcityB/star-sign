@@ -1,6 +1,6 @@
 .card {
   width: 400px;
-  height: 500px;
+  height: 700px;
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #fff;
@@ -26,7 +26,7 @@
 
 .profile-image-wrapper {
   width: 400px;
-  height: 500px;
+  height: 600px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -41,4 +41,99 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.profile-info {
+  display: flex;
+  gap: 10px;
+  padding: 5px 12px 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.profile-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.name {
+  font-size: 22px;
+}
+
+.location {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.zodiac-signs {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.goals-wrapper {
+  margin: 10px 0 0;
+  display: flex;
+  gap: 10px;
+}
+
+.goal {
+  background-color: #88c3ff82;
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.interests-wrapper {
+  margin: 10px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.interest {
+  background-color: #d588ff8f;
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.profile-match-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.score-wrapper {
+  display: flex;
+  padding: 4px 16px;
+  border-radius: 20px;
+}
+.score {
+  font-size: 18px;
+  font-weight: 500;
+  margin: auto;
+}
+
+.score-wrapper-4{
+  background-color: #88ff9e82;
+  display: flex;
+  padding: 4px 16px;
+  border-radius: 10px;
+}
+
+.score-wrapper-4-minus{
+  background-color: #ff888882;
+  display: flex;
+  padding: 4px 16px;
+  border-radius: 10px;
+}
+
+.category-score{
+  margin: auto;
+  font-size: 16px;
+  font-weight: 400;
 }

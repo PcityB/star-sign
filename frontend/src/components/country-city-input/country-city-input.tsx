@@ -46,7 +46,6 @@ export const CountryCityInput = <T extends FieldValues>({
       try {
         const countries = await Country.getAllCountries();
         setCountryOptions([
-          { label: 'All', value: '' },
           ...countries.map((country: ICountry) => ({
             label: country.name,
             value: country.isoCode,

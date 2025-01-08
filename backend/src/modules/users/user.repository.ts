@@ -52,8 +52,24 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
             },
           },
           ...(gender ? [{ gender }] : []),
-          ...(currentCity ? [{ birthCity: currentCity }] : []),
-          ...(currentCountry ? [{ birthCountry: currentCountry }] : []),
+          ...(currentCity
+            ? [
+                {
+                  Preference: {
+                    currentCity,
+                  },
+                },
+              ]
+            : []),
+          ...(currentCountry
+            ? [
+                {
+                  Preference: {
+                    currentCountry,
+                  },
+                },
+              ]
+            : []),
           ...(sunSign ? [{ PlanetaryPosition: { some: { sunSign } } }] : []),
           ...(moonSign ? [{ PlanetaryPosition: { some: { moonSign } } }] : []),
           ...(goals && goals.length > 0
@@ -85,6 +101,7 @@ class UserRepository extends BaseRepository<UserDTO, UserDTO[], SignUpRequestDTO
         Preference: {
           include: {
             goals: true,
+            interests: true
           },
         },
       },
