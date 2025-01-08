@@ -21,11 +21,10 @@ export class MatchRepository extends BaseRepository<
         ],
       },
     });
-
     if (existingMatch) {
       return await this.prisma.match.update({
         where: { id: existingMatch.id },
-        data,
+        data: {isAccepted: true},
       });
     } else {
       return await this.prisma.match.create({
@@ -40,9 +39,19 @@ export class MatchRepository extends BaseRepository<
         OR: [{ userId1: userId }, { userId2: userId }],
       },
       include: {
-        user1: true,
-        user2: true,
+        user1: {
+          include: {
+            Preference: true,
+            PlanetaryPosition: true
+          },
+        },
+        user2: {
+          include: {
+            Preference: true,
+            PlanetaryPosition: true
+          },
+        },
       },
     });
-  }
+  }  
 }

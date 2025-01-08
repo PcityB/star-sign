@@ -1,4 +1,4 @@
-import { UserWithMatchScoreDTO } from 'shared/src';
+import { UserDTO } from 'shared/src';
 import styles from './styles.module.css';
 import { ImageDisplay } from '~/components/components';
 import { FaUser } from 'react-icons/fa';
@@ -18,7 +18,8 @@ import {
 } from 'react-icons/tb';
 
 type UserCardProps = {
-  user: UserWithMatchScoreDTO;
+  user: UserDTO;
+  matchScore: number
 };
 
 const zodiacIcons = {
@@ -36,7 +37,7 @@ const zodiacIcons = {
   Pisces: <TbZodiacPisces size={20} />,
 };
 
-const UserCard = ({ user }: UserCardProps) => {
+const UserCard = ({ user, matchScore }: UserCardProps) => {
   function calculateAge(birthDate: Date): number {
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -57,7 +58,7 @@ const UserCard = ({ user }: UserCardProps) => {
     return `rgba(${red}, ${green}, 0, ${alpha})`;
   };
 
-  const scoreColor = calculateScoreColor(user?.matchScore?.totalScore || 0);
+  const scoreColor = calculateScoreColor(matchScore || 0);
 
   return (
     <div className={styles.card}>
@@ -80,12 +81,12 @@ const UserCard = ({ user }: UserCardProps) => {
             {user.Preference?.currentCountry && user.Preference?.currentCountry}
           </h3>
           <h4 className={styles['zodiac-signs']}>
-            {zodiacIcons[user?.PlanetaryPosition?.sunSign]} {user.PlanetaryPosition?.sunSign}
+            {zodiacIcons[user?.PlanetaryPosition[0].sunSign]} {user.PlanetaryPosition[0].sunSign}
           </h4>
         </div>
         <div className={styles['profile-match-info']}>
           <div className={styles['score-wrapper']} style={{ backgroundColor: scoreColor }}>
-            <h2 className={styles['score']}>{user?.matchScore?.totalScore || 'N/A'} pts</h2>
+            <h2 className={styles['score']}>{matchScore || 'N/A'} pts</h2>
           </div>
         </div>
       </div>

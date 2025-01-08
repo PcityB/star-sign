@@ -4,18 +4,16 @@ import styles from './styles.module.css';
 import { Loader, PageLayout } from '~/components/components.js';
 import { useEffect } from 'react';
 import { DataStatus } from '~/common/enums/enums.js';
-import { actions as userActions } from '~/store/users/users.js';
 import { actions as matchActions } from '~/store/matches/matches.js';
 
 const MutualMatches = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(({ auth }) => auth);
-  const { users, status } = useAppSelector(({ users }) => users);
+  const { matches, status } = useAppSelector(({ matches }) => matches);
 
   useEffect(() => {
     if (status === DataStatus.IDLE) {
       void dispatch(matchActions.getMatchesByUserId());
-      void dispatch(userActions.getAllByPreference());
     }
   }, [dispatch, status]);
 
@@ -27,6 +25,14 @@ const MutualMatches = (): JSX.Element => {
     return <Loader />;
   }
 
+  // Filter matches where `isAccepted` is true and include synastryScore
+  const filteredMatches = matches
+    .filter((match) => match.isAccepted)
+    .map((match) => ({
+      user: match.userId1 === user.id ? match.user2 : match.user1,
+      synastryScore: match.synastryScore,
+    }));
+
   return (
     <PageLayout>
       <div className={styles['profile-layout']}>
@@ -36,28 +42,13 @@ const MutualMatches = (): JSX.Element => {
           </div>
         </div>
         <div className={styles['user-cards']}>
-          {users.length > 0 ? (
+          {filteredMatches.length > 0 ? (
             <>
-              {users.map((user) => {
-                return (
-                  <div key={user.id} className={styles.cardWrapper}>
-                    <UserCard user={user} />
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            <div>No partners found. Please, update your preferences.</div>
-          )}
-          {users.length > 0 ? (
-            <>
-              {users.map((user) => {
-                return (
-                  <div key={user.id} className={styles.cardWrapper}>
-                    <UserCard user={user} />
-                  </div>
-                );
-              })}
+              {filteredMatches.map(({ user, synastryScore }) => (
+                <div key={user.id} className={styles.cardWrapper}>
+                  <UserCard user={user} matchScore={synastryScore} />
+                </div>
+              ))}
             </>
           ) : (
             <div>No partners found. Please, update your preferences.</div>
@@ -67,5 +58,6 @@ const MutualMatches = (): JSX.Element => {
     </PageLayout>
   );
 };
+
 
 export { MutualMatches };

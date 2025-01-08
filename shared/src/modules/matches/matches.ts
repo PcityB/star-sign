@@ -1,3 +1,5 @@
+import { UserDTO } from "../users/types";
+
 export type MatchDTO = {
   id: number; // Unique identifier for the match
   userId1: number; // ID of the first user
@@ -7,6 +9,8 @@ export type MatchDTO = {
   updatedAt: Date; // Timestamp when the match was last updated
   isAccepted: boolean; // Flag for match acceptance
   isDeleted: boolean; // Flag for logical deletion
+  user1: UserDTO;
+  user2: UserDTO;
 };
 
 export type MatchCreateRequestDTO = {

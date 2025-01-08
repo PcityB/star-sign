@@ -6,7 +6,7 @@ class MatchService {
   private matchRepository = new MatchRepository(prisma);
 
   public async create(match: MatchCreateRequestDTO) {
-    return await this.matchRepository.create(match);
+    return await this.matchRepository.createOrUpdate(match);
   }
 
   public async getAll() {
