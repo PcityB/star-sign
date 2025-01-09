@@ -13,7 +13,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center 60%;
-  height: 60vh;
+  height: calc(100vh -72px);
   width: 100%;
   align-items: center;
   justify-content: center;

@@ -13,7 +13,6 @@ class MessageController extends BaseController {
       if (!recipientId) {
         throw { status: 400, errors: 'Recipient ID is required.' };
       }
-      console.log(userId, recipientId);
 
       const messages = await this.messageService.getAllBySenderAndRecipient(+userId, +recipientId);
       this.sendResponse(res, messages, 200);

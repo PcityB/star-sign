@@ -1,21 +1,27 @@
 import React, { useCallback, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useWebSocket from '~/hooks/use-websocket/use-websocket';
 import { getToken } from '~/utils/auth';
-import { useAppDispatch, useAppForm, useAppSelector } from '~/hooks/hooks';
-import { ApiPath } from '~/common/enums/enums';
+import { useAppDispatch, useAppForm, useAppSelector, useModal } from '~/hooks/hooks';
+import { ApiPath, AppPath, DataStatus } from '~/common/enums/enums';
 import { actions as messageActions } from '~/store/messages/messages.js';
+import { actions as userActions } from '~/store/users/users.js';
 import styles from './styles.module.css';
 import { MessageCreateRequestSchema, MessageDTO } from '~/common/types/types';
 import { useWatch } from 'react-hook-form';
-import { IconButton, Input } from '~/components/components';
+import { Avatar, IconButton, Input, Loader, Modal } from '~/components/components';
+import { UserCard } from '../find-match/libs/components/components';
 
 const Messages: React.FC = () => {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const recipientId = Number(searchParams.get('recipientId'));
+  if (!recipientId) {
+    return <p>Please specify recipient user.</p>;
+  }
 
-  const { messages } = useAppSelector(({ messages }) => messages);
+  const { messages, status: messagesStatus } = useAppSelector(({ messages }) => messages);
+  const { user, userStatus: status } = useAppSelector(({ users }) => users);
   const sendMessage = useWebSocket(ApiPath.WS_API_URL, getToken() || '');
 
   const { control, errors, handleSubmit, isDirty, handleValueSet } = useAppForm<MessageDTO>({
@@ -41,9 +47,18 @@ const Messages: React.FC = () => {
 
   useEffect(() => {
     if (recipientId) {
+      void dispatch(userActions.getMatchPartnerById(recipientId));
       void dispatch(messageActions.getAllBySenderAndRecipient(recipientId));
     }
   }, [dispatch, recipientId]);
+
+  const navigate = useNavigate();
+
+  const handleRedirectToMatches = () => {
+    navigate(AppPath.MUTUAL_MATCHES);
+  };
+
+  const { isOpened: isModalOpen, onClose: handleModalClose, onOpen: handleModalOpen } = useModal();
 
   const contentValue = useWatch({
     control,
@@ -52,9 +67,40 @@ const Messages: React.FC = () => {
   });
   const isContentCounterShown = !errors['content']?.message;
 
+  if (
+    status === DataStatus.IDLE ||
+    status === DataStatus.PENDING ||
+    messagesStatus === DataStatus.IDLE ||
+    messagesStatus === DataStatus.PENDING
+  ) {
+    return <Loader />;
+  }
+
+  if ((!user && status === DataStatus.SUCCESS) || status === DataStatus.ERROR) {
+    return <p>You aren't allowed to sent messages to this user.</p>;
+  }
+
   return (
     <div className={styles.chatContainer}>
-      <h2 className={styles.header}>Chat</h2>
+      <div className={styles.header}>
+        <div className={styles['back-button']}>
+          <IconButton
+            iconName="leftArrow"
+            label="Back to Mutual Matches"
+            iconSize={24}
+            onClick={handleRedirectToMatches}
+          />
+        </div>
+        <div className={styles['name-avatar']}>
+          <button className={styles['avatar']} onClick={handleModalOpen}>
+            <Avatar
+              name={user?.name || ''}
+              imageUrl={user?.photos && user?.photos.length > 0 ? user?.photos[0] : undefined}
+            />
+          </button>
+          <h2>{user?.name || ''}</h2>
+        </div>
+      </div>
 
       <div className={styles.messagesContainer}>
         {messages.map((msg, index) => (
@@ -79,6 +125,9 @@ const Messages: React.FC = () => {
           <IconButton type="submit" isDisabled={!isDirty} iconName="send" label="Send Message" iconSize={24} />
         </div>
       </form>
+      <Modal isOpened={isModalOpen} onClose={handleModalClose} title="" isMinWidth={false}>
+        <UserCard user={user} isCenter onSingleClick={() => {}} onDoubleClick={() => {}} />
+      </Modal>
     </div>
   );
 };

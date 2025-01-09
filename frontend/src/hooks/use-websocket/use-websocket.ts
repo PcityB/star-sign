@@ -10,7 +10,6 @@ const useWebSocket = (url: string, token: string) => {
     ws.current = new WebSocket(url, token);
 
     ws.current.onopen = () => {
-      console.log('WebSocket connected');
     };
 
     ws.current.onmessage = (event) => {
@@ -19,7 +18,6 @@ const useWebSocket = (url: string, token: string) => {
     };
 
     ws.current.onclose = () => {
-      console.log('WebSocket disconnected');
     };
 
     return () => {

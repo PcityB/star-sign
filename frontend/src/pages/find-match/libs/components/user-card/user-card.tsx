@@ -18,7 +18,7 @@ import {
 } from 'react-icons/tb';
 
 type UserCardProps = {
-  user: UserWithMatchScoreDTO;
+  user: UserWithMatchScoreDTO | null;
   isCenter: boolean;
   onSingleClick: () => void;
   onDoubleClick: () => void;
@@ -61,6 +61,10 @@ const UserCard = ({ user, isCenter, onSingleClick, onDoubleClick }: UserCardProp
     return `rgba(${red}, ${green}, 0, ${alpha})`;
   };
 
+  if(!user){
+    return;
+  }
+
   const scoreColor = calculateScoreColor(user?.matchScore?.totalScore || 0);
   const cardStyles = isCenter ? `${styles.card} ${styles.centerCard}` : `${styles.card}`;
 
@@ -95,12 +99,16 @@ const UserCard = ({ user, isCenter, onSingleClick, onDoubleClick }: UserCardProp
           <div className={styles['score-wrapper']} style={{ backgroundColor: scoreColor }}>
             <h2 className={styles['score']}>{user?.matchScore?.totalScore || 'N/A'} pts Match</h2>
           </div>
-          <div className={styles['score-wrapper-4']}>
-            <h2 className={styles['category-score']}>+4 scores: {user?.matchScore?.categoryScores[4]}</h2>
-          </div>
-          <div className={styles['score-wrapper-4-minus']}>
-            <h2 className={styles['category-score']}>-4 scores: {user?.matchScore?.categoryScores[-4]}</h2>
-          </div>
+          {user?.matchScore?.categoryScores && (
+            <>
+              <div className={styles['score-wrapper-4']}>
+                <h2 className={styles['category-score']}>+4 scores: {user?.matchScore?.categoryScores[4]}</h2>
+              </div>
+              <div className={styles['score-wrapper-4-minus']}>
+                <h2 className={styles['category-score']}>-4 scores: {user?.matchScore?.categoryScores[-4]}</h2>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className={styles['goals-wrapper']}>

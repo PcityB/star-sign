@@ -31,12 +31,9 @@ export const setupWebSocket = (server: any) => {
       const userId = payload.id;
       userConnections.set(userId, ws);
 
-      console.log(`User ${userId} connected via WebSocket`);
-
       ws.on('message', async (data) => {
         try {
           const { recipientId, content } = JSON.parse(data.toString());
-          console.log(`Message from ${userId} to ${recipientId}: ${content}`);
           messageService.create({ senderId: userId, recipientId, content });
           const recipientSocket = userConnections.get(recipientId);
           if (recipientSocket) {
@@ -53,7 +50,6 @@ export const setupWebSocket = (server: any) => {
 
       ws.on('close', () => {
         userConnections.delete(userId);
-        console.log(`User ${userId} disconnected`);
       });
     } catch (err) {
       console.error('WebSocket connection error:', err);
