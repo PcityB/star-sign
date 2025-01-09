@@ -9,16 +9,14 @@ const useWebSocket = (url: string, token: string) => {
   useEffect(() => {
     ws.current = new WebSocket(url, token);
 
-    ws.current.onopen = () => {
-    };
+    ws.current.onopen = () => {};
 
     ws.current.onmessage = (event) => {
       const message = JSON.parse(event.data);
       dispatch(addMessage(message));
     };
 
-    ws.current.onclose = () => {
-    };
+    ws.current.onclose = () => {};
 
     return () => {
       ws.current?.close();

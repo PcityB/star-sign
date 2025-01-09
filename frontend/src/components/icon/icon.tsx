@@ -5,6 +5,7 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardDoubleArrowRight,
   MdKeyboardDoubleArrowLeft,
+  MdOutlineMessage,
 } from 'react-icons/md';
 import styles from './styles.module.css';
 import { GoSearch } from 'react-icons/go';
@@ -20,7 +21,8 @@ type IconName =
   | 'search'
   | 'strikedEye'
   | 'trashBin'
-  | 'send';
+  | 'send'
+  | 'message';
 
 type Properties = {
   height: number;
@@ -39,6 +41,7 @@ const iconNameToSvg: Record<IconName, IconType> = {
   strikedEye: FaEyeSlash,
   trashBin: FaRegTrashAlt,
   send: IoSend,
+  message: MdOutlineMessage,
 };
 
 const Icon = ({ height, name, width }: Properties): JSX.Element => {

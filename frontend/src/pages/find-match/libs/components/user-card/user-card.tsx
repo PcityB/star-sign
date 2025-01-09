@@ -61,7 +61,7 @@ const UserCard = ({ user, isCenter, onSingleClick, onDoubleClick }: UserCardProp
     return `rgba(${red}, ${green}, 0, ${alpha})`;
   };
 
-  if(!user){
+  if (!user) {
     return;
   }
 

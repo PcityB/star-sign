@@ -1,6 +1,6 @@
 import { UserDTO } from 'shared/src';
 import styles from './styles.module.css';
-import { ImageDisplay } from '~/components/components';
+import { IconButton, ImageDisplay } from '~/components/components';
 import { FaUser } from 'react-icons/fa';
 import {
   TbZodiacAries,
@@ -16,6 +16,8 @@ import {
   TbZodiacAquarius,
   TbZodiacPisces,
 } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
+import { AppPath } from '~/common/enums/enums';
 
 type UserCardProps = {
   user: UserDTO;
@@ -58,6 +60,12 @@ const UserCard = ({ user, matchScore }: UserCardProps) => {
     return `rgba(${red}, ${green}, 0, ${alpha})`;
   };
 
+  const navigate = useNavigate();
+
+  const handleRedirectToMessages = () => {
+    navigate(`${AppPath.MESSAGES}?recipientId=${user.id}`);
+  };
+
   const scoreColor = calculateScoreColor(matchScore || 0);
 
   return (
@@ -88,6 +96,7 @@ const UserCard = ({ user, matchScore }: UserCardProps) => {
           <div className={styles['score-wrapper']} style={{ backgroundColor: scoreColor }}>
             <h2 className={styles['score']}>{matchScore || 'N/A'} pts</h2>
           </div>
+          <IconButton iconName="message" label="To Messages" iconSize={24} onClick={handleRedirectToMessages} />
         </div>
       </div>
     </div>

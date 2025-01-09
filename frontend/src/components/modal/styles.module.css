@@ -11,7 +11,7 @@
 .modal-container {
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 25%;
   z-index: 1000;
   box-sizing: border-box;
   display: flex;
@@ -27,8 +27,10 @@
   transform: translate(-50%, -50%);
 }
 
-.modal-min-width{
+.modal-min-width {
   min-width: 800px;
+  top: 50%;
+  left: 50%;
 }
 
 .modal-header-title {

@@ -6,7 +6,7 @@ const allActions = {
   update,
   deleteCurrentUser,
   getAllByPreference,
-  getMatchPartnerById
+  getMatchPartnerById,
 };
 
 export { allActions as actions, reducer };

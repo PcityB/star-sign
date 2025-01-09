@@ -19,5 +19,4 @@ router.delete('/users/', authMiddleware, userController.deleteCurrentUser);
 router.get('/users/', authMiddleware, userController.getAllByPreferences);
 router.get('/users/:id', authMiddleware, userController.getMatchPartnerById);
 
-
 export default router;
