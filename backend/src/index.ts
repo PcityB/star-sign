@@ -4,6 +4,7 @@ import attributeRoutes from './modules/attributes/attribute.route';
 import preferenceRoutes from './modules/preferences/preference.route';
 import matchRoutes from './modules/matches/match.route';
 import messageRoutes from './modules/messages/message.route';
+import ideaRoutes from './modules/ideas/idea.route';
 import errorHandler from './libs/middleware/error.middleware';
 import cors from 'cors';
 import http from 'http';
@@ -20,6 +21,7 @@ app.use('/preferences', preferenceRoutes);
 app.use('/attributes', attributeRoutes);
 app.use('/matches', matchRoutes);
 app.use('/messages', messageRoutes);
+app.use('/ideas', ideaRoutes);
 app.use(errorHandler);
 
 const server = http.createServer(app);

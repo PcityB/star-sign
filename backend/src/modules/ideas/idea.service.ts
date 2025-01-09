@@ -5,6 +5,11 @@ import { DatingIdea } from './idea.model';
 
 const genAI = new GoogleGenerativeAI(config.gemini.apiKey);
 
+const today = new Date().toISOString().split('T')[0];
+const oneMonthLater = new Date();
+oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+const dateInAMonth = oneMonthLater.toISOString().split('T')[0];
+
 const schema = {
   description: 'List of dating ideas with astrological compatibility',
   type: SchemaType.ARRAY,
@@ -23,12 +28,12 @@ const schema = {
       },
       location: {
         type: SchemaType.STRING,
-        description: 'Recommended location for the date',
+        description: 'Recommended location for the date. No need to specify exact location, just cafe or museum is ok.',
         nullable: false,
       },
       date: {
         type: SchemaType.STRING,
-        description: 'Recommended date and time for the idea',
+        description: `Recommended date and time for the idea. It needs to be in the range of ${today} to ${dateInAMonth}.`,
         nullable: false,
       },
       astrologicalMatch: {
@@ -82,13 +87,17 @@ export class IdeaService {
         prompt: `Generate two romantic and compatible dating ideas based on the following astrological data:\nUser 1: ${JSON.stringify(user1.PlanetaryPosition)}\nUser 2: ${JSON.stringify(user2.PlanetaryPosition)}\n\nProvide detailed recommendations, including date, time, and location.`,
       };
 
-      const response = await this.model.generateContent(input.prompt);
+      const result = await this.model.generateContent(input.prompt);
+      const response = await result.response;
+      const text: string = await response.text();
 
-      if (!response) {
+      const ideas = JSON.parse(text);
+
+      if (!ideas) {
         throw new Error('Failed to generate dating ideas.');
       }
 
-      return response as unknown as DatingIdea[];
+      return ideas as unknown as DatingIdea[];
     } catch (error) {
       console.error('Error generating dating ideas:', error);
 
