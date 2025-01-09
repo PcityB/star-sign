@@ -8,8 +8,8 @@ export class MessageService {
     this.messageRepository = new MessageRepository(prisma);
   }
 
-  async getAllMessagesBySenderAndRecipient(senderId: number, recipientId: number) {
-    return this.messageRepository.getAllMessagesBetweenUsers(senderId, recipientId);
+  async getAllBySenderAndRecipient(senderId: number, recipientId: number) {
+    return this.messageRepository.getAllBetweenUsers(senderId, recipientId);
   }
 
   async create({ senderId, recipientId, content }: { senderId: number; recipientId: number; content: string }) {

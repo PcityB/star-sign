@@ -6,19 +6,16 @@ import { MessageService } from './message.service';
 class MessageController extends BaseController {
   private messageService = new MessageService();
 
-  public create = (req: Request, res: Response, next: NextFunction) =>
+  public getAllBySenderAndRecipient = (req: Request, res: Response, next: NextFunction) =>
     this.handleRequest(req, res, next, async (req: AuthRequest, res: Response) => {
       const userId = req.user?.id as string;
+      const recipientId = req.query.recipientId as string;
+      if (!recipientId) {
+        throw { status: 400, errors: 'Recipient ID is required.' };
+      }
 
-      const messageData = {
-        ...req.body,
-        senderId: +userId,
-        recipientId: +req.body.recipientId,
-      };
-
-      const message = this.messageService.create(messageData);
-
-      this.sendResponse(res, message, 200);
+      const messages = await this.messageService.getAllBySenderAndRecipient(+userId, +recipientId);
+      this.sendResponse(res, messages, 200);
     });
 }
 

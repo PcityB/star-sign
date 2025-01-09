@@ -24,7 +24,7 @@ export class MatchRepository extends BaseRepository<
     if (existingMatch) {
       return await this.prisma.match.update({
         where: { id: existingMatch.id },
-        data: {isAccepted: true},
+        data: { isAccepted: true },
       });
     } else {
       return await this.prisma.match.create({
@@ -42,16 +42,16 @@ export class MatchRepository extends BaseRepository<
         user1: {
           include: {
             Preference: true,
-            PlanetaryPosition: true
+            PlanetaryPosition: true,
           },
         },
         user2: {
           include: {
             Preference: true,
-            PlanetaryPosition: true
+            PlanetaryPosition: true,
           },
         },
       },
     });
-  }  
+  }
 }

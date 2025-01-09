@@ -5,6 +5,6 @@ const router = Router();
 
 const messageController = new MessageController();
 
-router.post('/', messageController.create);
+router.get('/', messageController.getAllBySenderAndRecipient);
 
 export default router;

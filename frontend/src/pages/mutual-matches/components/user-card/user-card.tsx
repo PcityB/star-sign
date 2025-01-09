@@ -19,7 +19,7 @@ import {
 
 type UserCardProps = {
   user: UserDTO;
-  matchScore: number
+  matchScore: number;
 };
 
 const zodiacIcons = {

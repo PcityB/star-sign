@@ -5,6 +5,7 @@ import { Users } from './users/users.service';
 import { Attributes } from './attributes/attribute.service';
 import { Matches } from './matches/match.service';
 import { Preferences } from './preferences/preference.service';
+import { Messages } from './messages/message.service';
 
 const http = new Http();
 
@@ -33,4 +34,9 @@ const preferences = new Preferences({
   http,
 });
 
-export { http, auth, users, attributes, matches, preferences };
+const messages = new Messages({
+  baseUrl: ApiPath.API_URL,
+  http,
+});
+
+export { http, auth, users, attributes, matches, preferences, messages };

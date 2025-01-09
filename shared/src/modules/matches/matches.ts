@@ -1,4 +1,4 @@
-import { UserDTO } from "../users/types";
+import { UserDTO } from '../users/types';
 
 export type MatchDTO = {
   id: number; // Unique identifier for the match

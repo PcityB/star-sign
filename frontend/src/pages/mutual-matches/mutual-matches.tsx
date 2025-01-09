@@ -59,5 +59,4 @@ const MutualMatches = (): JSX.Element => {
   );
 };
 
-
 export { MutualMatches };

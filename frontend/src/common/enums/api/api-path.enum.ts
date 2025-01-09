@@ -18,6 +18,9 @@ const ApiPath = {
 
   // Preferences routes
   PREFERENCES: '/preferences',
+
+  // Mesages routes
+  MESSAGES: '/messages',
 } as const;
 
 export { ApiPath };

@@ -12,7 +12,7 @@ export class MessageRepository extends BaseRepository<
     super(prisma, 'message');
   }
 
-  async getAllMessagesBetweenUsers(userId1: number, userId2: number): Promise<MessageDTO[]> {
+  async getAllBetweenUsers(userId1: number, userId2: number): Promise<MessageDTO[]> {
     return this.prisma.message.findMany({
       where: {
         OR: [

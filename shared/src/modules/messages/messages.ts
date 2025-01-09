@@ -1,4 +1,4 @@
-import { UserDTO } from "../users/types";
+import { UserDTO } from '../users/types';
 
 export type MessageDTO = {
   id?: number; // Optional for newly sent messages (before saving in the database)
@@ -7,5 +7,5 @@ export type MessageDTO = {
   content: string; // The text content of the message
   createdAt?: Date; // Optional for new messages, ISO format timestamp
   sender?: UserDTO;
-  recipient?: UserDTO
+  recipient?: UserDTO;
 };
