@@ -1,4 +1,5 @@
 import { UserDTO } from '../users/types';
+import z from 'zod';
 
 export type MessageDTO = {
   id?: number; // Optional for newly sent messages (before saving in the database)
@@ -9,3 +10,13 @@ export type MessageDTO = {
   sender?: UserDTO;
   recipient?: UserDTO;
 };
+
+export const MessageCreateRequestSchema = z.object({
+  content: z
+    .string()
+    .min(1, { message: 'Message content is required.' })
+    .max(1000, { message: 'Message must be at most 1000 characters.' }),
+
+  senderId: z.number(),
+  recipientId: z.number(),
+});

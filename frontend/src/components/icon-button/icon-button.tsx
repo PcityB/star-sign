@@ -8,11 +8,21 @@ type Properties = {
   iconName: IconName;
   isDisabled?: boolean;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
   variant?: 'outlined' | 'primary';
+  iconSize?: number;
 };
 
-const IconButton = ({ iconName, isDisabled = false, label, onClick, variant = 'primary' }: Properties): JSX.Element => {
+const IconButton = ({
+  iconName,
+  isDisabled = false,
+  label,
+  onClick,
+  type = 'button',
+  variant = 'primary',
+  iconSize,
+}: Properties): JSX.Element => {
   const isOutlined = variant === 'outlined';
   const buttonClasses = getValidClassNames({
     [styles['icon-button'] as string]: true,
@@ -20,9 +30,9 @@ const IconButton = ({ iconName, isDisabled = false, label, onClick, variant = 'p
   });
 
   return (
-    <button aria-label={label} className={buttonClasses} disabled={isDisabled} onClick={onClick} type="button">
+    <button aria-label={label} className={buttonClasses} disabled={isDisabled} onClick={onClick} type={type}>
       <span className="visually-hidden">{label}</span>
-      <Icon height={ICON_SIZE} name={iconName} width={ICON_SIZE} />
+      <Icon height={iconSize || ICON_SIZE} name={iconName} width={iconSize || ICON_SIZE} />
     </button>
   );
 };

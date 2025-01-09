@@ -10,7 +10,7 @@ import { Main } from '~/pages/main/main';
 import { AstroProfile } from '~/pages/astro-profile/astro-profile';
 import { FindMatch } from '~/pages/find-match/find-match';
 import { MutualMatches } from '~/pages/mutual-matches/mutual-matches';
-import { Messages } from '~/pages/chat/chat';
+import { Messages } from '~/pages/messages/messages';
 
 interface RouterConfigProps {
   user: UserDTO | null;

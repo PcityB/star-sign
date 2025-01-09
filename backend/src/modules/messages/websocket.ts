@@ -42,6 +42,10 @@ export const setupWebSocket = (server: any) => {
           if (recipientSocket) {
             recipientSocket.send(JSON.stringify({ senderId: userId, content }));
           }
+          const senderSocket = userConnections.get(userId);
+          if (senderSocket) {
+            senderSocket.send(JSON.stringify({ senderId: userId, content }));
+          }
         } catch (err) {
           console.error('Error processing message:', err);
         }

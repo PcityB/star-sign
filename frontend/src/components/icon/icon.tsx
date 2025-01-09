@@ -8,6 +8,7 @@ import {
 } from 'react-icons/md';
 import styles from './styles.module.css';
 import { GoSearch } from 'react-icons/go';
+import { IoSend } from 'react-icons/io5';
 
 type IconName =
   | 'cross'
@@ -18,7 +19,8 @@ type IconName =
   | 'rightDoubleArrow'
   | 'search'
   | 'strikedEye'
-  | 'trashBin';
+  | 'trashBin'
+  | 'send';
 
 type Properties = {
   height: number;
@@ -36,6 +38,7 @@ const iconNameToSvg: Record<IconName, IconType> = {
   search: GoSearch,
   strikedEye: FaEyeSlash,
   trashBin: FaRegTrashAlt,
+  send: IoSend,
 };
 
 const Icon = ({ height, name, width }: Properties): JSX.Element => {
