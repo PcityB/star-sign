@@ -17,5 +17,7 @@ router.patch('/users/:id', authMiddleware, upload.array('photos', 10), userContr
 router.delete('/users/', authMiddleware, userController.deleteCurrentUser);
 
 router.get('/users/', authMiddleware, userController.getAllByPreferences);
+router.get('/users/:id', authMiddleware, userController.getMatchPartnerById);
+
 
 export default router;

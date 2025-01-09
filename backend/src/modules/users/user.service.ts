@@ -7,12 +7,14 @@ import { SignUpRequestDTO, UserDTO, UserPatchRequestDTO } from './user.model';
 import { PlanetaryPositionService } from '../planetary-positions/planetary-positions.service';
 import { PreferenceService } from '../preferences/preference.service';
 import { SynastryScoreService } from '../synastry-score/synastry-score.service';
+import { MatchService } from '../matches/match.service';
 
 class UserService {
   private userRepository = new UserRepository(prisma);
   private planetaryPositionService = new PlanetaryPositionService();
   private preferenceService = new PreferenceService();
   private synastryScoreService = new SynastryScoreService();
+  private matchService = new MatchService();
 
   public async create(userPayload: SignUpRequestDTO) {
     if (await this.userRepository.findByEmail(userPayload.email)) {
@@ -95,6 +97,19 @@ class UserService {
   public async getById(id: string | number) {
     const user = await this.userRepository.find(id);
     return user && !user.isDeleted ? this.selectUserFields(user) : null;
+  }
+
+  public async getMatchPartnerById(userId: number, partnerId: number) {
+    const match = await this.matchService.getByUserIds(userId, partnerId);
+    if (!match) {
+      return;
+    }
+
+    const user = await this.userRepository.find(partnerId);
+    const matchScore = {
+      totalScore: match.synastryScore,
+    };
+    return user && !user.isDeleted ? { ...this.selectUserFields(user), matchScore } : null;
   }
 
   private selectUserFields(user: UserDTO) {

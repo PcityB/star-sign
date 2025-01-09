@@ -17,6 +17,10 @@ class MatchService {
     return await this.matchRepository.findByUserId(userId);
   }
 
+  public async getByUserIds(userId1: number, userId2: number) {
+    return await this.matchRepository.findByUserIds(userId1, userId2);
+  }
+
   public async accept(matchId: number, userId: number) {
     const match = await this.matchRepository.find(matchId);
     if (!match || match.userId1 !== userId || match.userId2 !== userId) {

@@ -42,6 +42,14 @@ class UserController extends BaseController {
       this.sendResponse(res, { user }, 200);
     });
 
+  public getMatchPartnerById = (req: Request, res: Response, next: NextFunction) =>
+    this.handleRequest(req, res, next, async (req: AuthRequest, res: Response) => {
+      const userId = req.user?.id as string;
+      const partnerId = req.params.id;
+      const user = await this.userService.getMatchPartnerById(+userId, +partnerId);
+      this.sendResponse(res, user, 200);
+    });
+
   public patchUser = (req: Request, res: Response, next: NextFunction) =>
     this.handleRequest(req, res, next, async (req: AuthRequest, res: Response) => {
       const userId = req.user?.id as string;

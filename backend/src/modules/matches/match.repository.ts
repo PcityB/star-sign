@@ -54,4 +54,29 @@ export class MatchRepository extends BaseRepository<
       },
     });
   }
+
+  public async findByUserIds(userId1: number, userId2: number): Promise<MatchDTO | null> {
+    return this.prisma.match.findFirst({
+      where: {
+        OR: [
+          { userId1, userId2 },
+          { userId1: userId2, userId2: userId1 },
+        ],
+      },
+      include: {
+        user1: {
+          include: {
+            Preference: true,
+            PlanetaryPosition: true,
+          },
+        },
+        user2: {
+          include: {
+            Preference: true,
+            PlanetaryPosition: true,
+          },
+        },
+      },
+    });
+  }
 }
