@@ -1,7 +1,9 @@
+import { MessageService } from './message.service';
 import { WebSocketServer, WebSocket } from 'ws';
 import { token } from '~/libs/token/token';
 
 const userConnections = new Map<number, WebSocket>();
+const messageService = new MessageService;
 
 export const setupWebSocket = (server: any) => {
   const wss = new WebSocketServer({ server });
@@ -35,6 +37,7 @@ export const setupWebSocket = (server: any) => {
         try {
           const { recipientId, content } = JSON.parse(data.toString());
           console.log(`Message from ${userId} to ${recipientId}: ${content}`);
+          messageService.create({senderId: userId, recipientId, content})
           const recipientSocket = userConnections.get(recipientId);
           if (recipientSocket) {
             recipientSocket.send(JSON.stringify({ senderId: userId, content }));

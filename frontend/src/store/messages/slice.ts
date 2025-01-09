@@ -1,15 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { MessageDTO } from '~/common/types/types';
 
-interface Message {
-  senderId: number;
-  recipientId: number;
-  content: string;
-  timestamp: string;
-}
-
-interface ChatState {
-  messages: Message[];
-}
+type ChatState = {
+  messages: MessageDTO[];
+};
 
 const initialState: ChatState = {
   messages: [],
@@ -19,10 +13,10 @@ const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
-    addMessage(state, action: PayloadAction<Message>) {
+    addMessage(state, action: PayloadAction<MessageDTO>) {
       state.messages.push(action.payload);
     },
-    setMessages(state, action: PayloadAction<Message[]>) {
+    setMessages(state, action: PayloadAction<MessageDTO[]>) {
       state.messages = action.payload;
     },
   },

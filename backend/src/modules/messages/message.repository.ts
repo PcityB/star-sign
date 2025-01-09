@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { MessageDTO } from './chat.model';
+import { MessageDTO } from './message.model';
 import { BaseRepository } from '~/libs/core/base-repository';
 
-export class PlanetaryPositionRepository extends BaseRepository<
+export class MessageRepository extends BaseRepository<
   MessageDTO,
   MessageDTO[],
   Partial<MessageDTO>,
