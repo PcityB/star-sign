@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import useWebSocket from '~/hooks/use-websocket/use-websocket';
 import { getToken } from '~/utils/auth';
 import { useAppSelector } from '~/hooks/hooks';
+import { ApiPath } from '~/common/enums/enums';
 
-const ChatBox: React.FC = () => {
+const Messages: React.FC = () => {
   const [content, setContent] = useState('');
   const [recipientId, setRecipientId] = useState<number | null>(null);
 
   const { messages } = useAppSelector(({ messages }) => messages);
-  const sendMessage = useWebSocket('ws://localhost:3000', getToken() || '');
+  const sendMessage = useWebSocket(ApiPath.WS_API_URL, getToken() || '');
 
   const handleSend = () => {
     if (recipientId && content.trim()) {
@@ -41,4 +42,4 @@ const ChatBox: React.FC = () => {
   );
 };
 
-export default ChatBox;
+export {Messages};

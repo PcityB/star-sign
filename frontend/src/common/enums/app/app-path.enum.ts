@@ -6,6 +6,7 @@ const AppPath = {
   ASTROPROFILE: '/astro-profile',
   FIND_MATCH: '/find-match',
   MUTUAL_MATCHES: '/mutual-matches',
+  MESSAGES: '/messages',
   NOT_FOUND: '/not-found',
   ANY: '*',
 } as const;

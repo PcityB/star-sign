@@ -1,5 +1,6 @@
 const ApiPath = {
   API_URL: import.meta.env.VITE_API_PATH || 'http://localhost:3000',
+  WS_API_URL: import.meta.env.VITE_WS_API_PATH || 'ws://localhost:3000',
 
   // Auth routes
   AUTH: '/auth',

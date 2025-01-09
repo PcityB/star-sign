@@ -10,6 +10,7 @@ import { Main } from '~/pages/main/main';
 import { AstroProfile } from '~/pages/astro-profile/astro-profile';
 import { FindMatch } from '~/pages/find-match/find-match';
 import { MutualMatches } from '~/pages/mutual-matches/mutual-matches';
+import { Messages } from '~/pages/chat/chat';
 
 interface RouterConfigProps {
   user: UserDTO | null;
@@ -52,6 +53,10 @@ export const createRoutes = ({ user, authChecked }: RouterConfigProps): RouteObj
       {
         path: AppPath.MUTUAL_MATCHES,
         element: <ProtectedRoute user={user} authChecked={authChecked} element={<MutualMatches />} />,
+      },
+      {
+        path: AppPath.MESSAGES,
+        element: <ProtectedRoute user={user} authChecked={authChecked} element={<Messages />} />,
       },
       {
         path: AppPath.ANY,
