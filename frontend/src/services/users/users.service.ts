@@ -58,6 +58,15 @@ class Users {
     });
   }
 
+  public getMatchPartnerById(partnerId: number): Promise<UserWithMatchScoreDTO> {
+    const token = getToken();
+
+    return this.http.load(this.getUrl(`/${partnerId}`), {
+      method: 'GET',
+      token,
+    });
+  }
+
   private getUrl(path = ''): string {
     return `${this.baseUrl}${this.basePath}${path}`;
   }

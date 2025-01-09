@@ -29,4 +29,11 @@ const getAllByPreference = createAsyncThunk<UserWithMatchScoreDTO[], undefined, 
   },
 );
 
-export { update, deleteCurrentUser, getAllByPreference };
+const getMatchPartnerById = createAsyncThunk<UserWithMatchScoreDTO, number, AsyncThunkConfig>(
+  `${name}/get-match-partner-by-id`,
+  async (partnerId, { extra: { usersService } }) => {
+    return await usersService.getMatchPartnerById(partnerId);
+  },
+);
+
+export { update, deleteCurrentUser, getAllByPreference, getMatchPartnerById };

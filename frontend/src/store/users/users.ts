@@ -1,4 +1,4 @@
-import { deleteCurrentUser, getAllByPreference, update } from './actions';
+import { deleteCurrentUser, getAllByPreference, update, getMatchPartnerById } from './actions';
 import { actions, reducer } from './slice';
 
 const allActions = {
@@ -6,6 +6,7 @@ const allActions = {
   update,
   deleteCurrentUser,
   getAllByPreference,
+  getMatchPartnerById
 };
 
 export { allActions as actions, reducer };
