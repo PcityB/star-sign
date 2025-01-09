@@ -82,7 +82,16 @@ class UserService {
       goals: goalIds,
     });
 
-    return users.map((user) => {
+    const existingMatches = await this.matchService.getByUserId(userId);
+    const existingMatchUserIds = new Set(
+      (existingMatches || []).map((match) => (match.userId1 === userId ? match.userId2 : match.userId1)),
+    );
+
+    const filteredUsers = users.filter(
+      (potentialMatch) => potentialMatch.id !== userId && !existingMatchUserIds.has(potentialMatch.id),
+    );
+
+    return filteredUsers.map((user) => {
       if (!user.PlanetaryPosition) {
         return;
       }

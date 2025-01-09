@@ -25,7 +25,6 @@ const MutualMatches = (): JSX.Element => {
     return <Loader />;
   }
 
-  // Filter matches where `isAccepted` is true and include synastryScore
   const filteredMatches = matches
     .filter((match) => match.isAccepted)
     .map((match) => ({
@@ -51,7 +50,7 @@ const MutualMatches = (): JSX.Element => {
               ))}
             </>
           ) : (
-            <div>No partners found. Please, update your preferences.</div>
+            <div>No mutual matches found. Try better!</div>
           )}
         </div>
       </div>

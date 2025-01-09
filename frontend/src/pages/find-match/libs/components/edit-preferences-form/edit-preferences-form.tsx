@@ -73,6 +73,7 @@ const EditPreferencesForm = ({ user }: Properties): JSX.Element => {
   ];
 
   const zodiacSignOptions = [
+    { label: 'All', value: '' },
     { label: 'Aries', value: 'Aries' },
     { label: 'Taurus', value: 'Taurus' },
     { label: 'Gemini', value: 'Gemini' },

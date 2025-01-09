@@ -59,8 +59,8 @@ export class MatchRepository extends BaseRepository<
     return this.prisma.match.findFirst({
       where: {
         OR: [
-          { userId1, userId2 },
-          { userId1: userId2, userId2: userId1 },
+          { userId1, userId2, isAccepted: true },
+          { userId1: userId2, userId2: userId1, isAccepted: true },
         ],
       },
       include: {
