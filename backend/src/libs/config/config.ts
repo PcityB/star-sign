@@ -14,6 +14,9 @@ interface Config {
     apiId: string;
     apiSecret: string;
   };
+  gemini: {
+    apiKey: string;
+  };
 }
 
 function requireEnv(variable: string | undefined, name: string): string {
@@ -34,6 +37,9 @@ const config: Config = {
   astronomy: {
     apiId: requireEnv(process.env.ASTRONOMY_API_ID, 'ASTRONOMY_API_ID'),
     apiSecret: requireEnv(process.env.ASTRONOMY_API_SECRET, 'ASTRONOMY_API_SECRET'),
+  },
+  gemini: {
+    apiKey: requireEnv(process.env.GEMINI_API_KEY, 'GEMINI_API_KEY'),
   },
 };
 
