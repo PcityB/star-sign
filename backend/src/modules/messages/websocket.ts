@@ -34,14 +34,15 @@ export const setupWebSocket = (server: any) => {
       ws.on('message', async (data) => {
         try {
           const { recipientId, content } = JSON.parse(data.toString());
+          const createdAt = new Date();
           messageService.create({ senderId: userId, recipientId, content });
           const recipientSocket = userConnections.get(recipientId);
           if (recipientSocket) {
-            recipientSocket.send(JSON.stringify({ senderId: userId, content }));
+            recipientSocket.send(JSON.stringify({ senderId: userId, content, createdAt }));
           }
           const senderSocket = userConnections.get(userId);
           if (senderSocket) {
-            senderSocket.send(JSON.stringify({ senderId: userId, content }));
+            senderSocket.send(JSON.stringify({ senderId: userId, content, createdAt }));
           }
         } catch (err) {
           console.error('Error processing message:', err);

@@ -22,6 +22,9 @@ const ApiPath = {
 
   // Mesages routes
   MESSAGES: '/messages',
+
+  // Ideas routes
+  IDEAS: '/ideas',
 } as const;
 
 export { ApiPath };

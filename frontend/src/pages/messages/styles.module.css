@@ -132,3 +132,20 @@ textarea:focus {
   flex-direction: column;
   justify-content: space-between;
 }
+
+/* Timestamp below messages */
+.timestamp {
+  font-size: 12px;
+  color: var(--color-background-secondary);
+  margin: 0;
+  text-align: right;
+}
+
+/* Date separator */
+.dateSeparator {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin: 10px 0;
+  font-weight: bold;
+}

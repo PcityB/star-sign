@@ -83,9 +83,7 @@ class UserService {
     });
 
     const existingMatches = await this.matchService.getByUserId(userId);
-    const existingMatchUserIds = new Set(
-      (existingMatches || []).map((match) => (match.userId1 === userId ? match.userId2 : match.userId1)),
-    );
+    const existingMatchUserIds = new Set((existingMatches || []).map((match) => match.userId1 === userId));
 
     const filteredUsers = users.filter(
       (potentialMatch) => potentialMatch.id !== userId && !existingMatchUserIds.has(potentialMatch.id),

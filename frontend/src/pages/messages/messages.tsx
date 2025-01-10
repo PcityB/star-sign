@@ -11,6 +11,12 @@ import { MessageCreateRequestSchema, MessageDTO } from '~/common/types/types';
 import { useWatch } from 'react-hook-form';
 import { Avatar, IconButton, Input, Loader, Modal } from '~/components/components';
 import { UserCard } from '../find-match/libs/components/components';
+import { formatDate } from '~/utils/date/date';
+
+const formatTime = (date: Date | undefined) => {
+  if (!date) return '';
+  return date.toString().split('T')[1].substring(0, 5);
+};
 
 const Messages: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -80,6 +86,8 @@ const Messages: React.FC = () => {
     return <p>You aren't allowed to sent messages to this user.</p>;
   }
 
+  let lastMessageDate: string | null = null;
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.header}>
@@ -103,14 +111,21 @@ const Messages: React.FC = () => {
       </div>
 
       <div className={styles.messagesContainer}>
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`${styles.message} ${msg.senderId === recipientId ? styles.received : styles.sent}`}
-          >
-            {msg.content}
-          </div>
-        ))}
+        {messages.map((msg, index) => {
+          const messageDate = formatDate(new Date(msg.createdAt || '') || '');
+          const isNewDate = messageDate !== lastMessageDate;
+          lastMessageDate = messageDate;
+
+          return (
+            <React.Fragment key={index}>
+              {isNewDate && <div className={styles.dateSeparator}>{messageDate}</div>}
+              <div className={`${styles.message} ${msg.senderId === recipientId ? styles.received : styles.sent}`}>
+                {msg.content}
+                <div className={styles.timestamp}>{formatTime(msg.createdAt)}</div>
+              </div>
+            </React.Fragment>
+          );
+        })}
       </div>
       <form className={styles['form-wrapper']} onSubmit={handleFormSubmit}>
         <div className={styles['inputs-wrapper']}>

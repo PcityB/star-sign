@@ -41,10 +41,10 @@ const MutualMatches = (): JSX.Element => {
           </div>
         </div>
         <div className={styles['user-cards']}>
-          {filteredMatches.length > 0 ? (
+          {filteredMatches.length ? (
             <>
-              {filteredMatches.map(({ user, synastryScore }) => (
-                <div key={user.id} className={styles.cardWrapper}>
+              {filteredMatches.map(({ user, synastryScore }, index) => (
+                <div key={user.id || index} className={styles.cardWrapper}>
                   <UserCard user={user} matchScore={synastryScore} />
                 </div>
               ))}

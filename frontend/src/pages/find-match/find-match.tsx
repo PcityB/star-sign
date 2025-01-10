@@ -15,26 +15,27 @@ const FindMatch = (): JSX.Element => {
   const { updateStatus, users, status } = useAppSelector(({ users }) => users);
   const { matches } = useAppSelector(({ matches }) => matches);
 
+  useEffect(() => {
+    void dispatch(userActions.getAllByPreference());
+    void dispatch(matchActions.getMatchesByUserId());
+  }, [dispatch]);
+
   const { isOpened: isEditModalOpen, onClose: handleEditModalClose, onOpen: handleEditModalOpen } = useModal();
 
   const [centerIndex, setCenterIndex] = useState(users[0] ? users[0].id : 0);
   const [likedUsers, setLikedUsers] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
-    void dispatch(matchActions.getMatchesByUserId());
-    void dispatch(userActions.getAllByPreference());
-  }, [dispatch]);
-  useEffect(() => {
-    void dispatch(userActions.getAllByPreference());
-  }, []);
-
-  console.log(users);
-
-  useEffect(() => {
     if (updateStatus === DataStatus.SUCCESS) {
       handleEditModalClose();
     }
   }, [dispatch, handleEditModalClose, updateStatus]);
+
+  useEffect(() => {
+    if (users && users.length) {
+      setCenterIndex(users[0].id);
+    }
+  }, [users]);
 
   if (!user) {
     return <Loader />;
@@ -96,7 +97,6 @@ const FindMatch = (): JSX.Element => {
 
                 return (
                   <div key={user.id} className={`${styles.cardWrapper} ${cardClass}`}>
-                    {/* Heart Icon */}
                     <div
                       className={`${styles.heartIcon} ${isLiked ? styles.heartLiked : ''}`}
                       onClick={(e) => {
