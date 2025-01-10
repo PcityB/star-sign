@@ -6,6 +6,7 @@ import { Attributes } from './attributes/attribute.service';
 import { Matches } from './matches/match.service';
 import { Preferences } from './preferences/preference.service';
 import { Messages } from './messages/message.service';
+import { Ideas } from './ideas/idea.service';
 
 const http = new Http();
 
@@ -39,4 +40,9 @@ const messages = new Messages({
   http,
 });
 
-export { http, auth, users, attributes, matches, preferences, messages };
+const ideas = new Ideas({
+  baseUrl: ApiPath.API_URL,
+  http,
+});
+
+export { http, auth, users, attributes, matches, preferences, messages, ideas };

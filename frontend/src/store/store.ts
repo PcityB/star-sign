@@ -5,6 +5,7 @@ import { attributes as attributesService } from '../services/services';
 import { matches as matchesService } from '../services/services';
 import { preferences as preferencesService } from '../services/services';
 import { messages as messagesService } from '../services/services';
+import { ideas as ideasService } from '../services/services';
 import { rootReducer } from './root-reducer';
 import { listenerMiddleware } from './middleware/401';
 
@@ -15,6 +16,7 @@ const extraArgument = {
   matchesService,
   preferencesService,
   messagesService,
+  ideasService,
 };
 
 const store = configureStore({
