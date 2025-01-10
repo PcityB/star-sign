@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { FaEye, FaEyeSlash, FaRegTrashAlt, FaTimes } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaRegLightbulb, FaRegTrashAlt, FaTimes } from 'react-icons/fa';
 import {
   MdKeyboardArrowRight,
   MdKeyboardArrowLeft,
@@ -22,7 +22,8 @@ type IconName =
   | 'strikedEye'
   | 'trashBin'
   | 'send'
-  | 'message';
+  | 'message'
+  | 'idea';
 
 type Properties = {
   height: number;
@@ -42,6 +43,7 @@ const iconNameToSvg: Record<IconName, IconType> = {
   trashBin: FaRegTrashAlt,
   send: IoSend,
   message: MdOutlineMessage,
+  idea: FaRegLightbulb,
 };
 
 const Icon = ({ height, name, width }: Properties): JSX.Element => {

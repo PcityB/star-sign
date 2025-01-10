@@ -6,6 +6,7 @@ import { useAppDispatch, useAppForm, useAppSelector, useModal } from '~/hooks/ho
 import { ApiPath, AppPath, DataStatus } from '~/common/enums/enums';
 import { actions as messageActions } from '~/store/messages/messages.js';
 import { actions as userActions } from '~/store/users/users.js';
+import { actions as ideaActions } from '~/store/ideas/ideas.js';
 import styles from './styles.module.css';
 import { MessageCreateRequestSchema, MessageDTO } from '~/common/types/types';
 import { useWatch } from 'react-hook-form';
@@ -28,6 +29,8 @@ const Messages: React.FC = () => {
 
   const { messages, status: messagesStatus } = useAppSelector(({ messages }) => messages);
   const { user, userStatus: status } = useAppSelector(({ users }) => users);
+  const { ideas, status: ideasStatus } = useAppSelector(({ ideas }) => ideas);
+
   const sendMessage = useWebSocket(ApiPath.WS_API_URL, getToken() || '');
 
   const { control, errors, handleSubmit, isDirty, handleValueSet } = useAppForm<MessageDTO>({
@@ -64,7 +67,14 @@ const Messages: React.FC = () => {
     navigate(AppPath.MUTUAL_MATCHES);
   };
 
+  const isIdeasLoading = ideasStatus === DataStatus.IDLE || ideasStatus === DataStatus.PENDING;
+  const fetchDatingIdeas = () => {
+    handleIdeaModalOpen();
+    void dispatch(ideaActions.get(recipientId));
+  };
+
   const { isOpened: isModalOpen, onClose: handleModalClose, onOpen: handleModalOpen } = useModal();
+  const { isOpened: isIdeaModalOpen, onClose: handleIdeaModalClose, onOpen: handleIdeaModalOpen } = useModal();
 
   const contentValue = useWatch({
     control,
@@ -108,16 +118,19 @@ const Messages: React.FC = () => {
           </button>
           <h2>{user?.name || ''}</h2>
         </div>
+        <div className={styles['ideas-button']}>
+          <IconButton iconName="idea" label="Fetch Dating Ideas" iconSize={24} onClick={fetchDatingIdeas} />
+        </div>
       </div>
 
       <div className={styles.messagesContainer}>
-        {messages.map((msg, index) => {
+        {messages.map((msg) => {
           const messageDate = formatDate(new Date(msg.createdAt || '') || '');
           const isNewDate = messageDate !== lastMessageDate;
           lastMessageDate = messageDate;
 
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={msg.id}>
               {isNewDate && <div className={styles.dateSeparator}>{messageDate}</div>}
               <div className={`${styles.message} ${msg.senderId === recipientId ? styles.received : styles.sent}`}>
                 {msg.content}
@@ -142,6 +155,48 @@ const Messages: React.FC = () => {
       </form>
       <Modal isOpened={isModalOpen} onClose={handleModalClose} title="" isMinWidth={false}>
         <UserCard user={user} isCenter onSingleClick={() => {}} onDoubleClick={() => {}} />
+      </Modal>
+      <Modal isOpened={isIdeaModalOpen} onClose={handleIdeaModalClose} title="" isMinWidth={true}>
+        {isIdeasLoading ? (
+          <Loader />
+        ) : (
+          <div className={styles['ideas-layout']}>
+            <div className={styles['ideas-match']}>
+              <h2>Astrological Match</h2>
+              <div className={styles['ideas-block']}>
+                <h3>Compatibility Notes</h3>
+                <p>{ideas[0].astrologicalMatch.compatibilityNotes}</p>
+              </div>
+              <div className={styles['ideas-block']}>
+                <h3>Partner 1</h3>
+                <p>{ideas[0].astrologicalMatch.user1Details}</p>
+              </div>
+              <div className={styles['ideas-block']}>
+                <h3>Partner 2</h3>
+                <p>{ideas[0].astrologicalMatch.user2Details}</p>
+              </div>
+            </div>
+            <div className={styles['ideas-wrapper']}>
+              {ideas.map((idea, index) => (
+                <div key={index} className={styles['idea-wrapper']}>
+                  <h2>{idea.title}</h2>
+                  <div className={styles['ideas-block']}>
+                    <h3>Date</h3>
+                    <p>{idea.date}</p>
+                  </div>
+                  <div className={styles['ideas-block']}>
+                    <h3>Location</h3>
+                    <p>{idea.location}</p>
+                  </div>
+                  <div className={styles['ideas-block']}>
+                    <h3>Description</h3>
+                    <p>{idea.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </Modal>
     </div>
   );

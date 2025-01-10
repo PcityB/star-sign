@@ -149,3 +149,16 @@ textarea:focus {
   margin: 10px 0;
   font-weight: bold;
 }
+
+.ideas-block p {
+  margin-top: 0;
+}
+
+.ideas-wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.idea-wrapper {
+  max-width: 450px;
+}
