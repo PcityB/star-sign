@@ -22,7 +22,7 @@ const FindMatch = (): JSX.Element => {
 
   const { isOpened: isEditModalOpen, onClose: handleEditModalClose, onOpen: handleEditModalOpen } = useModal();
 
-  const [centerIndex, setCenterIndex] = useState(users[0] ? users[0].id : 0);
+  const [centerIndex, setCenterIndex] = useState(0);
   const [likedUsers, setLikedUsers] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const FindMatch = (): JSX.Element => {
 
   useEffect(() => {
     if (users && users.length) {
-      setCenterIndex(users[0].id);
+      setCenterIndex(0);
     }
   }, [users]);
 
@@ -91,8 +91,8 @@ const FindMatch = (): JSX.Element => {
         <div className={styles.slider}>
           {users ? (
             <>
-              {users.map((user) => {
-                const cardClass = getCardClass(user.id);
+              {users.map((user, index) => {
+                const cardClass = getCardClass(index);
                 const isLiked = likedUsers[user.id];
 
                 return (
@@ -108,8 +108,8 @@ const FindMatch = (): JSX.Element => {
                     </div>
                     <UserCard
                       user={user}
-                      isCenter={user.id === centerIndex}
-                      onSingleClick={() => handleSingleClick(user.id)}
+                      isCenter={index === centerIndex}
+                      onSingleClick={() => handleSingleClick(index)}
                       onDoubleClick={() => handleDoubleClick(user, user.id)}
                     />
                   </div>

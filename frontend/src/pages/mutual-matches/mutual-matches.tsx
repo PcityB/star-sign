@@ -12,10 +12,10 @@ const MutualMatches = (): JSX.Element => {
   const { matches, status } = useAppSelector(({ matches }) => matches);
 
   useEffect(() => {
-    if (status === DataStatus.IDLE) {
+    if (status !== DataStatus.PENDING) {
       void dispatch(matchActions.getMatchesByUserId());
     }
-  }, [dispatch, status]);
+  }, [dispatch]);
 
   if (!user) {
     return <Loader />;
@@ -44,7 +44,7 @@ const MutualMatches = (): JSX.Element => {
           {filteredMatches.length ? (
             <>
               {filteredMatches.map(({ user, synastryScore }, index) => (
-                <div key={user.id || index} className={styles.cardWrapper}>
+                <div key={user?.id || index} className={styles.cardWrapper}>
                   <UserCard user={user} matchScore={synastryScore} />
                 </div>
               ))}

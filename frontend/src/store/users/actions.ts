@@ -9,7 +9,7 @@ const update = createAsyncThunk<void, { id: string; data: UserPatchRequestDTO },
     await usersService.update(id, data);
     setTimeout(async () => {
       await dispatch(authActions.fetchAuthenticatedUser());
-    }, 100);
+    }, 500);
   },
 );
 

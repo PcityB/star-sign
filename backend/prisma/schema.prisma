@@ -21,7 +21,7 @@ model User {
   photos            String[] // Array of photo URLs
   description       String?
   createdAt         DateTime            @default(now()) // Automatically set creation time
-  updatedAt         DateTime            @updatedAt // Automatically update on record modification
+  updatedAt         DateTime?            @updatedAt // Automatically update on record modification
   PlanetaryPosition PlanetaryPosition[]
   Preference        Preference?
   isDeleted         Boolean             @default(false)

@@ -46,5 +46,5 @@ export const UserPatchRequestSchema = z.object({
     .max(10, { message: 'No more than 10 photos are allowed.' })
     .optional(),
 
-  description: z.string().max(500, { message: 'Description must be at most 500 characters' }).optional(),
+  description: z.string().max(300, { message: 'Description must be at most 300 characters' }).optional(),
 });

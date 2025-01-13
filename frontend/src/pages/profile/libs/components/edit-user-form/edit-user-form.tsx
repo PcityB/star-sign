@@ -79,7 +79,7 @@ const EditUserForm = ({ user }: Properties): JSX.Element => {
           <Input control={control} errors={errors} label="My Profile Description" name="description" rowsCount={4} />
           {isDescriptionCounterShown && (
             <span className={styles['description-counter']}>
-              {descriptionValue?.length || 0}/{500}
+              {descriptionValue?.length || 0}/{300}
             </span>
           )}
         </div>

@@ -94,7 +94,7 @@ const UserCard = ({ user, matchScore }: UserCardProps) => {
         </div>
         <div className={styles['profile-match-info']}>
           <div className={styles['score-wrapper']} style={{ backgroundColor: scoreColor }}>
-            <h2 className={styles['score']}>{matchScore || 'N/A'} pts</h2>
+            <h2 className={styles['score']}>{matchScore || 'N/A'}</h2>
           </div>
           <IconButton iconName="message" label="To Messages" iconSize={24} onClick={handleRedirectToMessages} />
         </div>

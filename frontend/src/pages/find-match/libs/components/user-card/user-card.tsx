@@ -110,14 +110,15 @@ const UserCard = ({ user, isCenter, onSingleClick, onDoubleClick }: UserCardProp
             </>
           )}
         </div>
+        <div className={styles['description']}>{user.description}</div>
       </div>
       <div className={styles['goals-wrapper']}>
         {user.Preference?.goals &&
-          user.Preference?.goals.map((goal) => <div className={styles['goal']}>{goal.name}</div>)}
+          user.Preference?.goals.map((goal, index) => <div key={index} className={styles['goal']}>{goal.name}</div>)}
       </div>
       <div className={styles['interests-wrapper']}>
         {user.Preference?.interests &&
-          user.Preference?.interests.map((interest) => <div className={styles['interest']}>{interest.name}</div>)}
+          user.Preference?.interests.map((interest, index) => <div key={index} className={styles['interest']}>{interest.name}</div>)}
       </div>
     </div>
   );

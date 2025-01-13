@@ -11,7 +11,7 @@ const update = createAsyncThunk<void, { data: PreferenceCreateRequestDTO }, Asyn
     setTimeout(async () => {
       await dispatch(authActions.fetchAuthenticatedUser());
       await dispatch(usersActions.getAllByPreference());
-    }, 500);
+    }, 1000);
   },
 );
 

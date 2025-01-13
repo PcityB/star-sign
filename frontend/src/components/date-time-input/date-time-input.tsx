@@ -23,9 +23,14 @@ export const DateTimePickerInput = <T extends FieldValues>({
   const [selectedTimestamp, setSelectedTimestamp] = useState<Date | null>(null);
 
   useEffect(() => {
-    if (defaultDate) {
-      setSelectedTimestamp(defaultDate);
-    }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const yearsAgo18 = new Date(today);
+    yearsAgo18.setFullYear(today.getFullYear() - 18);
+
+    setSelectedTimestamp(defaultDate ?? yearsAgo18);
+    handleValueSet(timestampName, defaultDate ?? yearsAgo18)
   }, []);
 
   const handleTimestampChange = (datetime: Date | null) => {
@@ -37,7 +42,7 @@ export const DateTimePickerInput = <T extends FieldValues>({
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
+  
   return (
     <div className={styles['container']}>
       <div className={styles['input-container']}>
