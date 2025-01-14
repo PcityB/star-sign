@@ -35,6 +35,11 @@ class MatchService {
     if (!match || (match.userId1 !== userId && match.userId2 !== userId)) {
       throw { status: 403, errors: 'You cannot delete this match.' };
     }
+    if (match.isAccepted) {
+      match.isAccepted = false;
+      await this.matchRepository.update(matchId, match);
+      return true
+    }
     return await this.matchRepository.delete(matchId);
   }
 }

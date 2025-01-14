@@ -67,6 +67,7 @@ class UserService {
     if (!userPlanetaryPositions) {
       return [];
     }
+
     const userPreferences = await this.preferenceService.getByUserId(userId);
     const goalIds = userPreferences?.goals?.map((goal) => goal.id) || [];
 
@@ -83,22 +84,36 @@ class UserService {
     });
 
     const existingMatches = await this.matchService.getByUserId(userId);
-    const existingMatchUserIds = new Set((existingMatches || []).map((match) => match.userId1 === userId));
-
-    const filteredUsers = users.filter(
-      (potentialMatch) => potentialMatch.id !== userId && !existingMatchUserIds.has(potentialMatch.id),
+    const existingMatchUserIds = new Set(
+      (existingMatches || [])
+        .filter((match) => match.userId1 === userId || match.userId2 === userId || match.isAccepted)
+        .map((match) => (match.userId1 === userId ? match.userId2 : match.userId1)),
     );
 
-    return filteredUsers.map((user) => {
-      if (!user.PlanetaryPosition) {
-        return;
-      }
-      const matchScore = this.synastryScoreService.calculateCompatibility(
-        userPlanetaryPositions,
-        user.PlanetaryPosition[0],
-      );
-      return { ...this.selectUserFields(user), matchScore };
-    });
+    const filteredUsers = users
+      .filter(
+        (potentialMatch) =>
+          // Exclude the current user
+          potentialMatch.id !== userId &&
+          // Exclude users already in existing matches
+          !existingMatchUserIds.has(potentialMatch.id),
+      )
+      .map((user) => {
+        if (!user.PlanetaryPosition) {
+          return null;
+        }
+        const matchScore = this.synastryScoreService.calculateCompatibility(
+          userPlanetaryPositions,
+          user.PlanetaryPosition[0],
+        );
+        return { ...this.selectUserFields(user), matchScore };
+      })
+      .filter(Boolean); // Remove null entries
+
+    // Sort users by matchScore in descending order
+    const sortedUsers = filteredUsers.sort((a, b) => b.matchScore.totalScore - a.matchScore.totalScore);
+
+    return sortedUsers;
   }
 
   public async getById(id: string | number) {
