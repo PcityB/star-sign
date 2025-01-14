@@ -1,6 +1,6 @@
-import { UserWithMatchScoreDTO } from 'shared/src';
+import { UserDTO } from 'shared/src';
 import styles from './styles.module.css';
-import { ImageDisplay } from '~/components/components';
+import { IconButton, ImageDisplay } from '~/components/components';
 import { FaUser } from 'react-icons/fa';
 import {
   TbZodiacAries,
@@ -16,15 +16,15 @@ import {
   TbZodiacAquarius,
   TbZodiacPisces,
 } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
+import { AppPath } from '~/common/enums/enums';
 
 type UserCardProps = {
-  user: UserWithMatchScoreDTO | null;
-  isCenter: boolean;
-  onSingleClick: () => void;
+  user: UserDTO;
+  matchScore: number;
   onDoubleClick: () => void;
 };
 
-// Zodiac sign to icon mapping
 const zodiacIcons = {
   Aries: <TbZodiacAries size={20} />,
   Taurus: <TbZodiacTaurus size={20} />,
@@ -40,7 +40,7 @@ const zodiacIcons = {
   Pisces: <TbZodiacPisces size={20} />,
 };
 
-const UserCard = ({ user, isCenter, onSingleClick, onDoubleClick }: UserCardProps) => {
+const UserCard = ({ user, matchScore, onDoubleClick }: UserCardProps) => {
   function calculateAge(birthDate: Date): number {
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -61,18 +61,19 @@ const UserCard = ({ user, isCenter, onSingleClick, onDoubleClick }: UserCardProp
     return `rgba(${red}, ${green}, 0, ${alpha})`;
   };
 
-  if (!user) {
-    return;
-  }
+  const navigate = useNavigate();
 
-  const scoreColor = calculateScoreColor(user?.matchScore?.totalScore || 0);
-  const cardStyles = isCenter ? `${styles.card} ${styles.centerCard}` : `${styles.card}`;
+  const handleRedirectToMessages = () => {
+    navigate(`${AppPath.MESSAGES}?recipientId=${user.id}`);
+  };
+
+  const scoreColor = calculateScoreColor(matchScore || 0);
 
   return (
-    <div className={cardStyles} onClick={onSingleClick} onDoubleClick={onDoubleClick}>
+    <div className={styles.card} onDoubleClick={onDoubleClick}>
       <div className={styles['profile-image-wrapper']}>
         {user.photos?.length ? (
-          <div className={styles['profile-portfolio']}>
+          <div className={styles['profile-image']}>
             <ImageDisplay images={user.photos} />
           </div>
         ) : (
@@ -89,44 +90,15 @@ const UserCard = ({ user, isCenter, onSingleClick, onDoubleClick }: UserCardProp
             {user.Preference?.currentCountry && user.Preference?.currentCountry}
           </h3>
           <h4 className={styles['zodiac-signs']}>
-            Sun Sign:&nbsp; {zodiacIcons[user?.PlanetaryPosition?.sunSign]} {user.PlanetaryPosition?.sunSign}
-          </h4>
-          <h4 className={styles['zodiac-signs']}>
-            Moon Sign:&nbsp; {zodiacIcons[user.PlanetaryPosition?.moonSign]} {user.PlanetaryPosition?.moonSign}
+            {zodiacIcons[user?.PlanetaryPosition[0].sunSign]} {user.PlanetaryPosition[0].sunSign}
           </h4>
         </div>
         <div className={styles['profile-match-info']}>
           <div className={styles['score-wrapper']} style={{ backgroundColor: scoreColor }}>
-            <h2 className={styles['score']}>{user?.matchScore?.totalScore || 'N/A'} pts Match</h2>
+            <h2 className={styles['score']}>{matchScore || 'N/A'}</h2>
           </div>
-          {user?.matchScore?.categoryScores && (
-            <>
-              <div className={styles['score-wrapper-4']}>
-                <h2 className={styles['category-score']}>+4 scores: {user?.matchScore?.categoryScores[4]}</h2>
-              </div>
-              <div className={styles['score-wrapper-4-minus']}>
-                <h2 className={styles['category-score']}>-4 scores: {user?.matchScore?.categoryScores[-4]}</h2>
-              </div>
-            </>
-          )}
+          <IconButton iconName="message" label="To Messages" iconSize={24} onClick={handleRedirectToMessages} />
         </div>
-        <div className={styles['description']}>{user.description}</div>
-      </div>
-      <div className={styles['goals-wrapper']}>
-        {user.Preference?.goals &&
-          user.Preference?.goals.map((goal, index) => (
-            <div key={index} className={styles['goal']}>
-              {goal.name}
-            </div>
-          ))}
-      </div>
-      <div className={styles['interests-wrapper']}>
-        {user.Preference?.interests &&
-          user.Preference?.interests.map((interest, index) => (
-            <div key={index} className={styles['interest']}>
-              {interest.name}
-            </div>
-          ))}
       </div>
     </div>
   );

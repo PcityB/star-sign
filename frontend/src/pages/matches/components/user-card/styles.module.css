@@ -1,5 +1,5 @@
 .card {
-  width: 400px;
+  width: 290px;
   height: auto;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -8,25 +8,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 10px;
-  transition:
-    transform 0.3s ease,
-    opacity 0.3s ease;
+  margin: 0;
   cursor: pointer;
-}
-
-.centerCard {
-  opacity: 1;
-}
-
-.card:not(.centerCard) {
-  opacity: 0.5;
+  padding: 0 0 10px;
 }
 
 .profile-image-wrapper {
-  width: 400px;
-  min-height: 400px;
-  height: 400px;
+  width: 290px;
+  height: 270px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -39,8 +28,7 @@
 
 .profile-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 270px;
 }
 
 .profile-info {
@@ -57,60 +45,13 @@
   gap: 5px;
 }
 
-.profile-info {
-  display: flex;
-  gap: 10px;
-  padding: 5px 12px 0;
-  width: 100%;
-  justify-content: space-between;
-  position: relative; /* Required for positioning child elements */
-  transition: transform 0.3s ease-in-out; /* Add animation */
-}
-
-.profile-main-info {
-  transition: opacity 0.3s ease-in-out; /* Smoothly fade out */
-}
-
-.profile-info:hover .profile-main-info {
-  opacity: 0; /* Fade out on hover */
-}
-
-.profile-match-info {
-  transition: opacity 0.3s ease-in-out; /* Smoothly fade out */
-}
-
-.profile-info:hover .profile-match-info {
-  opacity: 0; /* Fade out on hover */
-}
-
-.description {
-  position: absolute; /* Position it relative to parent */
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0; /* Initially hidden */
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #333;
-  text-align: center;
-  transition: opacity 0.3s ease-in-out; /* Smoothly fade in */
-  pointer-events: none; /* Prevent interaction */
-}
-
-.profile-info:hover .description {
-  opacity: 1; /* Show on hover */
-  pointer-events: auto;
-}
-
 .name {
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .location {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   color: var(--color-text-primary);
 }
@@ -161,7 +102,7 @@
   border-radius: 20px;
 }
 .score {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   margin: auto;
 }

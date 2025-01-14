@@ -38,7 +38,7 @@ class MatchService {
     if (match.isAccepted) {
       match.isAccepted = false;
       await this.matchRepository.update(matchId, match);
-      return true
+      return true;
     }
     return await this.matchRepository.delete(matchId);
   }
