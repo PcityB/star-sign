@@ -51,8 +51,8 @@
 }
 
 .profile-image-wrapper .profile-image img {
-  width: 600px !important; /* Force width to 500px */
-  height: 700px !important; /* Force height to 700px */
+  width: 500px !important; /* Force width to 500px */
+  height: 600px !important; /* Force height to 700px */
   object-fit: cover !important; /* Ensure the image fills the dimensions without distortion */
 }
 

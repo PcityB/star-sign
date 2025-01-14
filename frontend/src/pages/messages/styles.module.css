@@ -32,7 +32,7 @@
 }
 
 .header h2 {
-  font-size: 1.5rem;
+  font-size: 20px;
   font-weight: 500;
 }
 
@@ -136,7 +136,7 @@ textarea:focus {
 /* Timestamp below messages */
 .timestamp {
   font-size: 12px;
-  color: var(--color-background-secondary);
+  color: var(--color-text-primary);
   margin: 0;
   text-align: right;
 }
@@ -150,6 +150,12 @@ textarea:focus {
   font-weight: bold;
 }
 
+.ideas-match {
+  padding: 5px;
+  border-radius: 20px;
+  border: 1px solid var(--color-brand-primary);
+}
+
 .ideas-block p {
   margin-top: 0;
 }
@@ -160,5 +166,97 @@ textarea:focus {
 }
 
 .idea-wrapper {
+  padding: 5px;
+  border-radius: 20px;
+  border: 1px solid var(--color-brand-primary);
   max-width: 450px;
+}
+
+.ideas-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ideas-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.ideas-match {
+  padding: 15px;
+  border-radius: 20px;
+  border: 2px solid var(--color-brand-primary);
+  background: linear-gradient(to bottom right, #fff5f0, #ffe4e1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ideas-block {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.ideas-block h3 {
+  color: var(--color-brand-primary);
+  font-weight: bold;
+}
+
+.ideas-block p {
+  margin-top: 5px;
+  color: #555;
+}
+
+.ideas-wrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.idea-wrapper {
+  padding: 15px;
+  border-radius: 20px;
+  border: 2px solid var(--color-brand-primary);
+  background: linear-gradient(to bottom right, #e6f7ff, #e0ffff);
+  max-width: 450px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.idea-wrapper h2 {
+  font-size: 1.5rem;
+  color: var(--color-brand-secondary);
+}
+
+.idea-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom right, #d4f1f9, #b8e9f8);
+}
+
+.idea-wrapper h3 {
+  color: var(--color-brand-primary);
+  font-weight: bold;
+}
+
+.idea-wrapper p {
+  margin-top: 5px;
+  color: #333;
+}
+
+.ideas-match h2,
+.idea-wrapper h2 {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ideas-loader {
+  width: 900px;
 }

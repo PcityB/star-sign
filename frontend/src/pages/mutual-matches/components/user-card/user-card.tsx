@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppPath } from '~/common/enums/enums';
 
 type UserCardProps = {
-  user: UserDTO;
+  user: UserDTO | null;
   matchScore: number;
 };
 
@@ -40,6 +40,10 @@ const zodiacIcons = {
 };
 
 const UserCard = ({ user, matchScore }: UserCardProps) => {
+  if (!user) {
+    return null;
+  }
+
   function calculateAge(birthDate: Date): number {
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();

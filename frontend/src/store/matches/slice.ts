@@ -89,7 +89,6 @@ const { reducer, actions, name } = createSlice({
       })
       .addCase(deleteMatch.fulfilled, (state, action) => {
         state.deleteStatus = DataStatus.SUCCESS;
-        state.matches = state.matches.filter((match) => match.id !== +action.meta.arg.id);
         notifySuccess('Match deleted successfully.');
       })
       .addCase(deleteMatch.rejected, (state, action) => {

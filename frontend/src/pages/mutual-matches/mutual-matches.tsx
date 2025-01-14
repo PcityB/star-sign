@@ -12,9 +12,7 @@ const MutualMatches = (): JSX.Element => {
   const { matches, status } = useAppSelector(({ matches }) => matches);
 
   useEffect(() => {
-    if (status !== DataStatus.PENDING) {
-      void dispatch(matchActions.getMatchesByUserId());
-    }
+    void dispatch(matchActions.getMatchesByUserId());
   }, [dispatch]);
 
   if (!user) {

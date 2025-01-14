@@ -119,6 +119,7 @@ const Messages: React.FC = () => {
           <h2>{user?.name || ''}</h2>
         </div>
         <div className={styles['ideas-button']}>
+          <h3>Dating ideas</h3>
           <IconButton iconName="idea" label="Fetch Dating Ideas" iconSize={24} onClick={fetchDatingIdeas} />
         </div>
       </div>
@@ -158,7 +159,9 @@ const Messages: React.FC = () => {
       </Modal>
       <Modal isOpened={isIdeaModalOpen} onClose={handleIdeaModalClose} title="" isMinWidth={true}>
         {isIdeasLoading ? (
-          <Loader />
+          <div className={styles['ideas-loader']}>
+            <Loader />
+          </div>
         ) : (
           <div className={styles['ideas-layout']}>
             <div className={styles['ideas-match']}>
