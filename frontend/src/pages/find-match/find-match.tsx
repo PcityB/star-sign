@@ -22,7 +22,7 @@ const FindMatch = (): JSX.Element => {
 
   const { isOpened: isEditModalOpen, onClose: handleEditModalClose, onOpen: handleEditModalOpen } = useModal();
 
-  const [centerIndex, setCenterIndex] = useState(0);
+  const [centerIndex, setCenterIndex] = useState();
   const [likedUsers, setLikedUsers] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const FindMatch = (): JSX.Element => {
 
   useEffect(() => {
     if (users && users.length) {
-      setCenterIndex(0);
+      setCenterIndex(-1);
     }
   }, [users]);
 

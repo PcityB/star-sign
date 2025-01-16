@@ -86,7 +86,7 @@ class UserService {
     const existingMatches = await this.matchService.getByUserId(userId);
     const existingMatchUserIds = new Set(
       (existingMatches || [])
-        .filter((match) => match.userId1 === userId || match.userId2 === userId || match.isAccepted)
+        .filter((match) => match.userId1 === userId || match.isAccepted)
         .map((match) => (match.userId1 === userId ? match.userId2 : match.userId1)),
     );
 

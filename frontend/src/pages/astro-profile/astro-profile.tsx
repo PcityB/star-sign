@@ -1,6 +1,6 @@
 import { Button, Loader, NavLink, PageLayout } from '~/components/components';
 import styles from './styles.module.css';
-import { useAppSelector } from '~/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '~/hooks/hooks';
 import {
   TbZodiacAries,
   TbZodiacTaurus,
@@ -15,8 +15,10 @@ import {
   TbZodiacAquarius,
   TbZodiacPisces,
 } from 'react-icons/tb';
-import { AppPath } from '~/common/enums/enums';
+import { AppPath, DataStatus } from '~/common/enums/enums';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { actions as authActions } from '~/store/auth/auth';
 
 // Map zodiac signs to their corresponding icons and styles
 const zodiacMap = {
@@ -50,9 +52,16 @@ const zodiacIcons = {
 };
 
 const AstroProfile = (): JSX.Element => {
-  const { user } = useAppSelector(({ auth }) => auth);
+  const dispatch = useAppDispatch();
+  const { user, status } = useAppSelector(({ auth }) => auth);
 
-  if (!user) {
+  useEffect(() => {
+    if (status !== DataStatus.SUCCESS) {
+      void dispatch(authActions.fetchAuthenticatedUser());
+    }
+  }, []);
+
+  if (!user || status === DataStatus.IDLE || status === DataStatus.PENDING) {
     return <Loader />;
   }
 
